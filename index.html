@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ===== Page title & description (shows in Google search results) ===== -->
+    <title>Lasan Perera | Electronic &amp; Telecommunication Engineering Undergraduate</title>
+    <meta name="title" content="Lasan Perera | Robotics &amp; Embedded Systems" />
+    <meta
+      name="description"
+      content="Electronic and Telecommunication Engineering undergraduate at the University of Moratuwa, building robots, embedded systems and custom hardware."
+    />
+
+    <!-- ===== Link preview when you share the site on WhatsApp/LinkedIn ===== -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Lasan Perera | Robotics &amp; Embedded Systems" />
+    <meta
+      property="og:description"
+      content="Electronic and Telecommunication Engineering undergraduate at the University of Moratuwa, building robots, embedded systems and custom hardware."
+    />
+
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
+
+    <!-- Icon library (Font Awesome) -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/utilities.css" />
+  </head>
+
+  <body>
+    <header id="hero">
+      <!-- ===================== NAVBAR ===================== -->
+      <nav class="navbar">
+        <div class="container">
+          <h1 id="logo">
+            <a href="#hero"><img src="assets/logo.svg" alt="Lasan Perera" /></a>
+          </h1>
+
+          <ul class="nav-menu">
+            <li><a class="nav-link" href="#about">ABOUT</a></li>
+            <li><a class="nav-link" href="#projects">PROJECTS</a></li>
+            <li><a class="nav-link" href="#awards">AWARDS</a></li>
+            <li><a class="nav-link" href="#footer">CONTACT</a></li>
+            <li>
+              <a class="nav-link btn btn-primary" href="assets/Lasan-Perera-CV.pdf" target="_blank"
+                >RESUME <i class="fas fa-arrow-right"></i
+              ></a>
+            </li>
+
+            <!-- Light / dark switch -->
+            <div class="theme-switch">
+              <input type="checkbox" id="switch" aria-label="Toggle dark mode" />
+              <label class="toggle-icons" for="switch">
+                <img class="moon" src="assets/moon.svg" alt="" />
+                <img class="sun" src="assets/sun.svg" alt="" />
+              </label>
+            </div>
+          </ul>
+
+          <!-- Mobile menu button -->
+          <div class="hamburger" role="button" tabindex="0" aria-label="Open menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+        </div>
+      </nav>
+
+      <!-- ===================== HERO ===================== -->
+      <section class="header-container">
+        <img class="profile-image" src="assets/profile-image.jpg" alt="Lasan Perera" />
+        <h1>Hi, I'm Lasan</h1>
+
+        <div class="content-text">
+          <h2>Building robots,</h2>
+          <h2>embedded systems and custom hardware.</h2>
+
+          <p>
+            Electronic and Telecommunication Engineering undergraduate at the University of
+            Moratuwa. I design PCBs, write firmware and tune control systems &mdash; from
+            industrial robotic arms to medical IoT devices.
+          </p>
+        </div>
+
+        <div class="hero-buttons">
+          <a href="#projects" class="btn btn-secondary">See My Work</a>
+          <a href="mailto:lasanperera.lsp@gmail.com" class="btn btn-outline">Connect With Me</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <strong>2&times;</strong>
+            <span>Competition Champion</span>
+          </div>
+          <div class="stat">
+            <strong>9</strong>
+            <span>Robotics &amp; Ideathon Finals</span>
+          </div>
+          <div class="stat">
+            <strong>10+</strong>
+            <span>Hardware Projects</span>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <!-- ===================== ABOUT + SKILLS ===================== -->
+    <section id="about" class="container section">
+      <div class="division"></div>
+      <div class="content-text">
+        <h2>About Me</h2>
+        <p>
+          I work at the point where hardware meets code. Most of my projects start with a blank
+          schematic in Altium and end with firmware running on an STM32 or ESP32 &mdash; motor
+          drivers, sensor arrays, control loops and the PCBs that carry them. Right now I'm an
+          Electronics &amp; Embedded Engineer at RYSERA Innovations and I'm heading toward robotics,
+          computer vision and autonomous systems.
+        </p>
+      </div>
+
+      <div class="skills">
+        <div class="skill-group">
+          <h3><i class="fas fa-code"></i> Languages</h3>
+          <ul class="tags">
+            <li>Python</li>
+            <li>C</li>
+            <li>C++</li>
+            <li>MATLAB</li>
+          </ul>
+        </div>
+
+        <div class="skill-group">
+          <h3><i class="fas fa-microchip"></i> Frameworks &amp; Platforms</h3>
+          <ul class="tags">
+            <li>ROS 2</li>
+            <li>Webots</li>
+            <li>STM32CubeIDE</li>
+            <li>ESP-IDF</li>
+            <li>Arduino</li>
+          </ul>
+        </div>
+
+        <div class="skill-group">
+          <h3><i class="fas fa-tools"></i> Tools &amp; Software</h3>
+          <ul class="tags">
+            <li>Altium Designer</li>
+            <li>SolidWorks</li>
+            <li>Fusion 360</li>
+            <li>Git / GitHub</li>
+          </ul>
+        </div>
+
+        <div class="skill-group">
+          <h3><i class="fas fa-robot"></i> Interests</h3>
+          <ul class="tags">
+            <li>Robotics &amp; Automation</li>
+            <li>Machine Learning</li>
+            <li>Computer Vision</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== EXPERIENCE & EDUCATION ===================== -->
+    <section id="experience" class="container section">
+      <div class="division"></div>
+      <div class="content-text">
+        <h2>Experience &amp; Education</h2>
+        <p>Where I've studied and worked.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="timeline-date">Dec 2025 &ndash; Present</span>
+          <h3>Electronics &amp; Embedded Engineer</h3>
+          <h4>RYSERA Innovations &middot; Part Time</h4>
+          <p>
+            Designed and developed the embedded control system for "Drop To Print", a 3D printing
+            automation project. Designed custom PCBs and implemented firmware for microcontroller
+            based motion and system control.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-date">Aug 2024 &ndash; Present</span>
+          <h3>B.Sc. Eng. (Hons.) in Electronic &amp; Telecommunication Engineering</h3>
+          <h4>University of Moratuwa</h4>
+          <p>
+            Cumulative GPA of 4.00/4.00. Dean's List in the first, second and third semesters.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-date">Aug 2023 &ndash; Mar 2025</span>
+          <h3>Teaching Assistant</h3>
+          <h4>Mathscriber &middot; Part Time</h4>
+          <p>
+            Tutored students in advanced mathematics and guided them through problem-solving
+            techniques and exam strategies.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-date">Jan 2009 &ndash; Jan 2023</span>
+          <h3>GCE Advanced Level &mdash; Physical Science</h3>
+          <h4>Ananda College, Colombo</h4>
+          <p>
+            Four A passes and ranked 11th in the country out of 40,000+ candidates, with a z-score
+            of +2.9037.
+          </p>
+        </div>
+      </div>
+
+      <div class="courses">
+        <h3 class="courses-title">Online Courses</h3>
+        <ul class="tags">
+          <li>ROS 2 &mdash; Udemy (Jan 2026)</li>
+          <li>Mobile Sensing and Robotics &mdash; Univ. of Freiburg (Feb 2026)</li>
+          <li>Machine Learning Specialization &mdash; DeepLearning.AI (Mar 2025)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== PROJECTS ===================== -->
+    <section id="projects" class="project-container container">
+      <div class="division"></div>
+      <div class="content-text">
+        <h2>Projects</h2>
+        <p>Robots, embedded devices and hardware I've designed and built.</p>
+      </div>
+
+      <article class="project">
+        <!-- PROJECT CARD 1 -->
+        <!-- To use a real photo: add your image to assets/project/ and change the
+             style="..." below to  style="background-image: url('assets/project/my-photo.jpg')" -->
+        <div class="card" style="background-image: url('assets/project/6-DOF Robotic Arm.jpg')">
+          <i class="fas fa-hand-paper card-watermark"></i>
+          <div class="project-info">
+            <div class="project-bio">
+              <h3>6-DOF Robotic Arm</h3>
+              <p>MATLAB &middot; Inverse Kinematics</p>
+            </div>
+            <div class="project-link">
+              <a href="https://github.com/Lasan-Perera/6_DoF_Arm-NeuralNexus" target="_blank" aria-label="GitHub"
+                ><i class="fab fa-github"></i
+              ></a>
+            </div>
+          </div>
+          <p class="card-detail">
+            A six-degree-of-freedom robotic arm for precise object manipulation and pick-and-place
+            tasks. Built an inverse kinematics simulation in MATLAB to model flexible movement and
+            accurate end-effector positioning across the full workspace.
+          </p>
+        </div>
+        
+        <!-- PROJECT CARD 2 -->
+        <div class="card" style="background-image: url('assets/project/line\ Follower.png')">
+          <i class="fas fa-wave-square card-watermark"></i>
+          <div class="project-info">
+            <div class="project-bio">
+              <h3>Fully Analog Line Follower</h3>
+              <p>LM324 Op-amps &middot; TCRT5000 &middot; L293D</p>
+            </div>
+            <div class="project-link">
+              <a href="https://github.com/Lasan-Perera/Fully-Analogue-Line-Follower_EN2091" target="_blank" aria-label="GitHub"
+                ><i class="fab fa-github"></i
+              ></a>
+            </div>
+          </div>
+          <p class="card-detail">
+            A line-following robot with no microcontroller and no software at all. An 8-channel IR
+            sensor array with adjustable thresholds and weighted error calculation feeds a hardware
+            PD controller built entirely from op-amps.
+          </p>
+        </div>
+
+        <!-- PROJECT CARD 3 -->
+        <div class="card" style="background-image: url('assets/project/medihelp.png')">
+          <i class="fas fa-heartbeat card-watermark"></i>
+          <div class="project-info">
+            <div class="project-bio">
+              <h3>Smart Infusion Pump Monitor</h3>
+              <p>ESP32 &middot; IR Drop Detection &middot; IoT</p>
+            </div>
+            <div class="project-link">
+              <a href="https://github.com/Lasan-Perera/BM2210-ADAPTIVE_GRAVITY_BASED_INFUSION_PUMP_MONITOR" target="_blank" aria-label="GitHub"
+                ><i class="fab fa-github"></i
+              ></a>
+            </div>
+          </div>
+          <p class="card-detail">
+            Real-time IV drop detection with interrupt-driven IR sensing, live drops-per-minute
+            calculation, circular buffering and a non-blocking three-state alarm. Finalist at
+            Startup Spark 2.0 and Pitch Arena 2025.
+          </p>
+        </div>
+
+        <!-- PROJECT CARD 4 -->
+        <div class="card">
+          <i class="fas fa-print card-watermark"></i>
+          <div class="project-info">
+            <div class="project-bio">
+              <h3>DropToPrint &mdash; 3D Printer WiFi Automation</h3>
+              <p>ESP32-S3 &middot; ESP-IDF &middot; USB OTG</p>
+            </div>
+            <div class="project-link">
+              <a href="https://github.com/Lasan-Perera" target="_blank" aria-label="GitHub"
+                ><i class="fab fa-github"></i
+              ></a>
+            </div>
+          </div>
+          <p class="card-detail">
+            A low-cost way to add WiFi and automation to legacy 3D printers. Firmware written in
+            ESP-IDF using USB OTG (CDC-ACM VCP), paired with a web UI and a fully SMD, market-ready
+            PCB.
+          </p>
+        </div>
+
+        <!-- PROJECT CARD 5 -->
+         <div class="card" style="background-image: url('assets/project/mazerunner.jpg')"> 
+          <i class="fas fa-brain card-watermark"></i>
+          <div class="project-info">
+            <div class="project-bio">
+              <h3>MazeRunner V1&ndash;V3 &mdash; Micromouse Robot</h3>
+              <p>STM32F411 &middot; Custom PCB &middot; ICM-20602 IMU</p>
+            </div>
+            <div class="project-link">
+              <a href="https://github.com/Lasan-Perera" target="_blank" aria-label="GitHub"
+                ><i class="fab fa-github"></i
+              ></a>
+            </div>
+          </div>
+          <p class="card-detail">
+            Competition-level micromouse optimised for speed, stability and accurate maze solving.
+            Complete hardware platform, motor drivers and PCB, with encoder motors and IMU for
+            precise motion control. Champions at MazeMaster 2026.
+          </p>
+        </div>
+
+        
+
+        <!-- PROJECT CARD 6 -->
+        <div class="card">
+          <i class="fas fa-satellite card-watermark"></i>
+          <div class="project-info">
+            <div class="project-bio">
+              <h3>Project Phoenix &mdash; Cube Satellite</h3>
+              <p>ADCS Subsystem &middot; Ongoing</p>
+            </div>
+            <div class="project-link">
+              <a href="https://github.com/Lasan-Perera" target="_blank" aria-label="GitHub"
+                ><i class="fab fa-github"></i
+              ></a>
+            </div>
+          </div>
+          <p class="card-detail">
+            Stage 1 launches a high-altitude balloon into the stratosphere. I'm the batch
+            coordinator for the project and a member of the attitude determination and control
+            subsystem.
+          </p>
+        </div>
+
+        <!-- PROJECT CARD 7 -->
+        <div class="card" style="background-image: url('assets/project/marshmellow.png')">
+          <i class="fas fa-robot card-watermark"></i>
+          <div class="project-info">
+            <div class="project-bio">
+              <h3>Multi-Task Autonomous Robot (EN2533)</h3>
+              <p>C++ Firmware &middot; Custom Hardware</p>
+            </div>
+            <div class="project-link">
+              <a href="https://github.com/Lasan-Perera/EN2533_Team_MarshMello" target="_blank" aria-label="GitHub"
+                ><i class="fab fa-github"></i
+              ></a>
+            </div>
+          </div>
+          <p class="card-detail">
+            A robot that handles line following, wall following, grid solving, box manipulation,
+            colour detection, ball shooting and timed interactions. Full hardware platform plus C++
+            firmware for autonomous navigation.
+          </p>
+        </div>
+
+        <!-- PROJECT CARD 8 -->
+        <div class="card" style="background-image: url('assets/project/NetWarden.jpg')">
+          <i class="fas fa-network-wired card-watermark"></i>
+          <div class="project-info">
+            <div class="project-bio">
+              <h3>Net-Warden &mdash; Network Manager</h3>
+              <p>Node.js &middot; MySQL &middot; Ubuntu</p>
+            </div>
+            <div class="project-link">
+              <a href="https://github.com/Lasan-Perera" target="_blank" aria-label="GitHub"
+                ><i class="fab fa-github"></i
+              ></a>
+            </div>
+          </div>
+          <p class="card-detail">
+            A home and SOHO device that monitors network usage and throttles connections that
+            exceed their allocated limits. Firmware, backend and web interface. Finalist at
+            HackVenture 1.0.
+          </p>
+        </div>
+
+        <!-- PROJECT CARD 9 -->
+        <div class="card" style="background-image: url('assets/project/Analog\ speed\ controller.png')">
+          <i class="fas fa-tachometer-alt card-watermark"></i>
+          <div class="project-info">
+            <div class="project-bio">
+              <h3>Analog PID DC Motor Speed Controller</h3>
+              <p>TL072 Op-amps &middot; IRLZ44N &middot; Analog PID</p>
+            </div>
+            <div class="project-link">
+              <a href="https://github.com/denethp/fully-analog-dc-motor-speed-controller" target="_blank" aria-label="GitHub"
+                ><i class="fab fa-github"></i
+              ></a>
+            </div>
+          </div>
+          <p class="card-detail">
+            A fully analog closed-loop DC motor speed controller with no microcontroller or digital
+            processing &mdash; PID control, PWM generation and feedback all built from op-amps and
+            discrete power electronics. As part of Team Neural Nexus I designed the sensing and
+            feedback stage: a frequency-to-voltage converter turning encoder pulses into a
+            proportional analog voltage for the control loop.
+          </p>
+        </div>
+      </article>
+
+      <a href="https://github.com/Lasan-Perera" class="btn btn-secondary" target="_blank"
+        >See More on GitHub <i class="fas fa-arrow-right"></i
+      ></a>
+    </section>
+
+    <!-- ===================== AWARDS & COMPETITIONS ===================== -->
+    <section id="awards" class="container section">
+      <div class="division"></div>
+      <div class="content-text">
+        <h2>Awards &amp; Competitions</h2>
+        <p>Robotics competitions, ideathons and academic recognitions.</p>
+      </div>
+
+      <div class="awards">
+        <div class="award award-gold">
+          <span class="award-place">Champions</span>
+          <h3>Sri Lanka Robotics Challenge 2026</h3>
+          <p>University of Moratuwa &middot; Apr 2026</p>
+        </div>
+        <div class="award award-gold">
+          <span class="award-place">Champions</span>
+          <h3>MazeMaster 2026 &mdash; Micromouse</h3>
+          <p>Uva Wellassa University &middot; Jan 2026</p>
+        </div>
+        <div class="award">
+          <span class="award-place">1st Runner-up</span>
+          <h3>InnovMind 2026 &mdash; Micromouse</h3>
+          <p>SLTC Research University &middot; Mar 2026</p>
+        </div>
+        <div class="award">
+          <span class="award-place">2nd Runner-up</span>
+          <h3>MicroMaze 2.0 &mdash; Micromouse</h3>
+          <p>Informatics Institute of Technology &middot; Aug 2025</p>
+        </div>
+        <div class="award">
+          <span class="award-place">2nd Runner-up</span>
+          <h3>RoboFest 2025 &mdash; Micromouse</h3>
+          <p>SLIIT &middot; Sep 2025</p>
+        </div>
+        <div class="award">
+          <span class="award-place">Finalists</span>
+          <h3>Sri Lanka Robotics Challenge 2025</h3>
+          <p>University of Moratuwa &middot; Apr 2025</p>
+        </div>
+        <div class="award">
+          <span class="award-place">Finalists</span>
+          <h3>Startup Spark 2.0 &mdash; Ideathon</h3>
+          <p>IESL &middot; Aug 2025</p>
+        </div>
+        <div class="award">
+          <span class="award-place">Finalists</span>
+          <h3>Pitch Arena &mdash; Ideathon</h3>
+          <p>University of Ruhuna &middot; Dec 2025</p>
+        </div>
+        <div class="award">
+          <span class="award-place">Finalists</span>
+          <h3>HackVenture 1.0 &mdash; Ideathon</h3>
+          <p>University of Kelaniya &middot; Aug 2024</p>
+        </div>
+      </div>
+
+      <div class="honours">
+        <h3 class="courses-title">Academic Honours</h3>
+        <ul class="honour-list">
+          <li>
+            <strong>Best Student of the Physical Science Section</strong>, Ananda College &mdash;
+            C. M. Weerarathna, P. De. S. Kularathna and Jayantha Mallimarachchi Memorial Awards
+            (Dec 2023)
+          </li>
+          <li>
+            <strong>Honourable Mention</strong>, Sri Lanka Chemistry Olympiad &mdash; Institute of
+            Chemistry Ceylon (Dec 2023)
+          </li>
+          <li><strong>Best Performing Competitor</strong>, Sapentia '21 Science Competition (Jun 2022)</li>
+        </ul>
+      </div>
+
+      <div class="honours">
+        <h3 class="courses-title">Leadership &amp; Volunteering</h3>
+        <ul class="honour-list">
+          <li><strong>Vice Chairman</strong>, MoraForesight 4.0 &mdash; IEEE Student Branch University of Moratuwa (2026)</li>
+          <li><strong>Logistics Committee Lead</strong>, IEEE Student Branch University of Moratuwa (2025/2026)</li>
+          <li><strong>Logistics Committee Lead</strong>, MoraForesight 3.0 &mdash; IEEE Student Branch University of Moratuwa (2025)</li>
+          <li><strong>Publicity Committee Member</strong>, IEEE Student Branch University of Moratuwa (2024/2025)</li>
+          <li><strong>Logistics Committee Member</strong>, MERCon 2024 &mdash; IEEE Student Branch University of Moratuwa</li>
+          <li><strong>Projects Committee Member</strong>, Old Anandian Engineers' Guild (2024/2025)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer id="footer">
+      <div class="container">
+        <h2 class="footer-title">Let's build something</h2>
+        <a href="mailto:lasanperera.lsp@gmail.com">lasanperera.lsp@gmail.com</a>
+        <a href="tel:+94704512644">+94 70 451 2644</a>
+
+        <div class="social">
+          <a href="https://github.com/Lasan-Perera" target="_blank" aria-label="GitHub"
+            ><i class="fab fa-github"></i
+          ></a>
+          <a href="https://www.linkedin.com/in/lasan-perera-0881a3280/" target="_blank" aria-label="LinkedIn"
+            ><i class="fab fa-linkedin-in"></i
+          ></a>
+          <a href="mailto:lasanperera.lsp@gmail.com" aria-label="Email"
+            ><i class="fas fa-envelope"></i
+          ></a>
+        </div>
+
+        <p>Colombo, Sri Lanka</p>
+        <p>Copyright &copy; Lasan Perera <span id="datee"></span>, All rights reserved</p>
+      </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
