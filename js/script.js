@@ -41,13 +41,11 @@ function switchTheme(e) {
 
 toggleSwitch.addEventListener("change", switchTheme, false);
 
-// Load the visitor's saved choice
-const savedTheme = localStorage.getItem("theme");
+// Load the visitor's saved choice, defaulting to dark
+const savedTheme = localStorage.getItem("theme") || "dark";
 
-if (savedTheme) {
-  document.documentElement.setAttribute("data-theme", savedTheme);
-  toggleSwitch.checked = savedTheme === "dark";
-}
+document.documentElement.setAttribute("data-theme", savedTheme);
+toggleSwitch.checked = savedTheme === "dark";
 
 /* ---------- 3. Footer year ---------- */
 document.querySelector("#datee").innerHTML = new Date().getFullYear();
