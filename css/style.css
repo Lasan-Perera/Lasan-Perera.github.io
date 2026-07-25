@@ -390,6 +390,28 @@ label:focus-visible {
   border-radius: 20px;
 }
 
+.award-silver {
+  border-left-color: #b8b8c0;
+}
+
+.award-silver .award-place {
+  color: #1a1a1a;
+  background: #c8c9ce;
+  padding: 0.15rem 0.5rem;
+  border-radius: 20px;
+}
+
+.award-bronze {
+  border-left-color: #c98a5e;
+}
+
+.award-bronze .award-place {
+  color: #ffffff;
+  background: #c17d4f;
+  padding: 0.15rem 0.5rem;
+  border-radius: 20px;
+}
+
 .award h3 {
   font-size: 1rem;
   margin: 0.5rem 0 0.2rem;
