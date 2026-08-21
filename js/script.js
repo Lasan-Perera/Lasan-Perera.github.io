@@ -79,6 +79,55 @@ if (backToTop) {
   });
 }
 
+/* ---------- Bonus: active nav-link highlighting while scrolling ---------- */
+const spyLinks = document.querySelectorAll(".nav-link[href^='#']:not(.btn)");
+const spySections = new Map();
+
+spyLinks.forEach((link) => {
+  const section = document.querySelector(link.getAttribute("href"));
+  if (section) spySections.set(section, link);
+});
+
+if (spySections.size && "IntersectionObserver" in window) {
+  const navSpyObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const link = spySections.get(entry.target);
+        if (!link || !entry.isIntersecting) return;
+        spyLinks.forEach((l) => l.classList.remove("active"));
+        link.classList.add("active");
+      });
+    },
+    { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+  );
+
+  spySections.forEach((_, section) => navSpyObserver.observe(section));
+}
+
+/* ---------- Bonus: copy-to-clipboard with a toast ---------- */
+const toast = document.querySelector("#toast");
+let toastTimer = null;
+
+function showToast(message) {
+  if (!toast) return;
+  toast.textContent = message;
+  toast.classList.add("visible");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove("visible"), 1800);
+}
+
+document.querySelectorAll(".copy-btn").forEach((btn) => {
+  btn.addEventListener("click", async () => {
+    const text = btn.dataset.copy;
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast("Copied to clipboard!");
+    } catch {
+      showToast("Couldn't copy — please copy manually");
+    }
+  });
+});
+
 document.documentElement.classList.add("js-enabled");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 

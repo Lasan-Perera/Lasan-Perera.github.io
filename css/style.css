@@ -62,7 +62,12 @@ a {
 }
 
 body {
-  background: var(--bg-primary);
+  background-color: var(--bg-primary);
+  /* Randomly scattered hexagons of varying size/opacity, not a uniform grid —
+     tiled at 700x1400 so the repeat is large enough not to read as a pattern.
+     Scrolls with the page as part of the normal body background. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='1400' viewBox='0 0 700 1400'%3E%3Cg fill='none' stroke='%23ffcd42'%3E%3Cpolygon points='251.3,211.2 239.0,232.5 214.4,232.5 202.1,211.2 214.4,189.9 239.0,189.9' stroke-opacity='0.099' stroke-width='1.58'/%3E%3Cpolygon points='276.7,81.2 266.3,99.1 245.6,99.1 235.3,81.2 245.6,63.3 266.3,63.3' stroke-opacity='0.096' stroke-width='1.49'/%3E%3Cpolygon points='67.4,127.0 58.1,143.0 39.7,143.0 30.4,127.0 39.7,111.0 58.1,111.0' stroke-opacity='0.197' stroke-width='1.21'/%3E%3Cpolygon points='188.9,878.4 172.6,906.6 140.0,906.6 123.7,878.4 140.0,850.2 172.6,850.2' stroke-opacity='0.165' stroke-width='1.46'/%3E%3Cpolygon points='713.6,65.2 698.5,91.4 668.3,91.4 653.2,65.2 668.3,39.1 698.5,39.1' stroke-opacity='0.128' stroke-width='1.24'/%3E%3Cpolygon points='111.5,431.9 97.0,457.0 67.9,457.0 53.4,431.9 67.9,406.7 97.0,406.7' stroke-opacity='0.113' stroke-width='1.63'/%3E%3Cpolygon points='469.0,521.4 458.1,540.2 436.3,540.2 425.5,521.4 436.3,502.5 458.1,502.5' stroke-opacity='0.099' stroke-width='1.16'/%3E%3Cpolygon points='162.7,952.6 153.4,968.6 134.9,968.6 125.6,952.6 134.9,936.5 153.4,936.5' stroke-opacity='0.13' stroke-width='1.63'/%3E%3Cpolygon points='345.7,419.7 331.5,444.3 303.0,444.3 288.8,419.7 303.0,395.0 331.5,395.0' stroke-opacity='0.18' stroke-width='1.33'/%3E%3Cpolygon points='432.7,735.3 417.4,761.8 386.8,761.8 371.5,735.3 386.8,708.7 417.4,708.7' stroke-opacity='0.185' stroke-width='1.36'/%3E%3Cpolygon points='704.4,165.3 695.3,181.1 677.0,181.1 667.8,165.3 677.0,149.5 695.3,149.5' stroke-opacity='0.188' stroke-width='1.24'/%3E%3Cpolygon points='367.3,54.9 354.8,76.6 329.8,76.6 317.2,54.9 329.8,33.2 354.8,33.2' stroke-opacity='0.188' stroke-width='1.62'/%3E%3Cpolygon points='638.6,439.2 625.7,461.6 599.9,461.6 587.1,439.2 599.9,416.9 625.7,416.9' stroke-opacity='0.168' stroke-width='1.62'/%3E%3Cpolygon points='351.9,1176.0 335.6,1204.1 303.1,1204.1 286.8,1176.0 303.1,1147.8 335.6,1147.8' stroke-opacity='0.151' stroke-width='1.7'/%3E%3Cpolygon points='66.9,982.1 54.7,1003.3 30.2,1003.3 18.0,982.1 30.2,960.9 54.7,960.9' stroke-opacity='0.22' stroke-width='1.84'/%3E%3Cpolygon points='224.3,540.1 211.7,561.8 186.7,561.8 174.2,540.1 186.7,518.4 211.7,518.4' stroke-opacity='0.093' stroke-width='1.52'/%3E%3Cpolygon points='126.2,163.9 121.9,171.4 113.3,171.4 109.0,163.9 113.3,156.5 121.9,156.5' stroke-opacity='0.191' stroke-width='1.21'/%3E%3Cpolygon points='203.9,547.3 188.6,573.8 158.1,573.8 142.8,547.3 158.1,520.9 188.6,520.9' stroke-opacity='0.102' stroke-width='1.51'/%3E%3Cpolygon points='413.7,1236.7 399.2,1262.0 370.0,1262.0 355.5,1236.7 370.0,1211.5 399.2,1211.5' stroke-opacity='0.203' stroke-width='1.35'/%3E%3Cpolygon points='321.6,502.3 306.1,529.0 275.3,529.0 259.8,502.3 275.3,475.5 306.1,475.5' stroke-opacity='0.214' stroke-width='1.24'/%3E%3Cpolygon points='136.7,324.7 130.0,336.3 116.7,336.3 110.1,324.7 116.7,313.2 130.0,313.2' stroke-opacity='0.154' stroke-width='1.63'/%3E%3Cpolygon points='202.2,5.7 193.1,21.6 174.8,21.6 165.6,5.7 174.8,-10.1 193.1,-10.1' stroke-opacity='0.139' stroke-width='1.61'/%3E%3Cpolygon points='688.1,966.7 677.6,984.8 656.7,984.8 646.3,966.7 656.7,948.6 677.6,948.6' stroke-opacity='0.171' stroke-width='1.71'/%3E%3Cpolygon points='65.9,1259.3 51.8,1283.6 23.8,1283.6 9.7,1259.3 23.8,1235.0 51.8,1235.0' stroke-opacity='0.203' stroke-width='1.82'/%3E%3Cpolygon points='284.5,558.6 279.6,567.1 269.8,567.1 264.9,558.6 269.8,550.1 279.6,550.1' stroke-opacity='0.174' stroke-width='1.16'/%3E%3Cpolygon points='58.5,292.3 52.8,302.1 41.5,302.1 35.8,292.3 41.5,282.4 52.8,282.4' stroke-opacity='0.133' stroke-width='1.15'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
   color: var(--text-color);
   font-family: "Raleway", sans-serif;
   line-height: 1.5;
@@ -73,6 +78,7 @@ a:focus-visible,
 .hamburger:focus-visible,
 .hex-avatar:focus-visible,
 .back-to-top:focus-visible,
+.copy-btn:focus-visible,
 label:focus-visible {
   outline: 3px solid var(--primary-color);
   outline-offset: 3px;
@@ -122,6 +128,30 @@ label:focus-visible {
 
 .back-to-top:hover {
   opacity: 0.85;
+}
+
+/* ---------------- Toast (copy-to-clipboard confirmation) ---------------- */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 2rem;
+  transform: translateX(-50%) translateY(16px);
+  background: var(--bg-secondary);
+  color: var(--bg-primary);
+  padding: 0.6rem 1.3rem;
+  border-radius: 30px;
+  font-size: 0.82rem;
+  font-weight: var(--weight-semibold);
+  box-shadow: var(--shadow);
+  z-index: 40;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 /* ---------------- Navbar ---------------- */
@@ -181,6 +211,15 @@ label:focus-visible {
 }
 
 .navbar .nav-link:not(.btn):hover::after {
+  width: 100%;
+}
+
+/* Highlights whichever section is currently in view while scrolling */
+.navbar .nav-link:not(.btn).active {
+  color: var(--primary-color);
+}
+
+.navbar .nav-link:not(.btn).active::after {
   width: 100%;
 }
 
@@ -451,6 +490,30 @@ label:focus-visible {
   margin: 2.5rem 0 0;
 }
 
+/* GitHub activity widgets */
+.github-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.github-stats img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+#githubContribGraph {
+  max-width: 480px;
+}
+
+#githubTopLangs {
+  max-width: 300px;
+}
+
 .project {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -557,6 +620,29 @@ label:focus-visible {
 }
 
 #footer a:hover {
+  color: var(--primary-color);
+}
+
+.contact-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.copy-btn {
+  border: none;
+  background: none;
+  color: #fff;
+  opacity: 0.55;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0.2rem;
+  transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.copy-btn:hover {
+  opacity: 1;
   color: var(--primary-color);
 }
 

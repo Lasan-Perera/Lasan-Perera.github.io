@@ -258,6 +258,21 @@
         <p>Robots, embedded devices and hardware I've designed and built.</p>
       </div>
 
+      <div class="github-stats">
+        <img
+          id="githubContribGraph"
+          src="https://ghchart.rshah.org/ffcd42/Lasan-Perera"
+          alt="Lasan Perera's GitHub contribution graph"
+          loading="lazy"
+        />
+        <img
+          id="githubTopLangs"
+          src="https://github-readme-stats-eight-theta.vercel.app/api/top-langs/?username=Lasan-Perera&layout=compact&hide_border=true&bg_color=00000000&title_color=ffcd42&text_color=a8a8a8&icon_color=ffcd42"
+          alt="Lasan Perera's most-used GitHub languages"
+          loading="lazy"
+        />
+      </div>
+
       <article class="project">
         <!-- PROJECT CARD 1 -->
         <!-- To use a real photo: add your image to assets/project/ and change the
@@ -620,8 +635,20 @@
     <footer id="footer">
       <div class="container">
         <h2 class="footer-title">Let's build something</h2>
-        <a href="mailto:lasanperera.lsp@gmail.com">lasanperera.lsp@gmail.com</a>
-        <a href="tel:+94704512644">+94 70 451 2644</a>
+
+        <div class="contact-line">
+          <a href="mailto:lasanperera.lsp@gmail.com">lasanperera.lsp@gmail.com</a>
+          <button class="copy-btn" data-copy="lasanperera.lsp@gmail.com" aria-label="Copy email address">
+            <i class="fas fa-copy"></i>
+          </button>
+        </div>
+
+        <div class="contact-line">
+          <a href="tel:+94704512644">+94 70 451 2644</a>
+          <button class="copy-btn" data-copy="+94 70 451 2644" aria-label="Copy phone number">
+            <i class="fas fa-copy"></i>
+          </button>
+        </div>
 
         <div class="social">
           <a href="https://github.com/Lasan-Perera" target="_blank" aria-label="GitHub"
@@ -643,6 +670,8 @@
     <button class="back-to-top" id="backToTop" aria-label="Back to top">
       <i class="fas fa-arrow-up"></i>
     </button>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <script src="js/script.js"></script>
   </body>
