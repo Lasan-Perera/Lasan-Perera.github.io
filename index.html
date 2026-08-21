@@ -35,6 +35,8 @@
   </head>
 
   <body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+
     <header id="hero">
       <!-- ===================== NAVBAR ===================== -->
       <nav class="navbar">
@@ -45,6 +47,7 @@
 
           <ul class="nav-menu">
             <li><a class="nav-link" href="#about">ABOUT</a></li>
+            <li><a class="nav-link" href="#publications">PUBLICATIONS</a></li>
             <li><a class="nav-link" href="#projects">PROJECTS</a></li>
             <li><a class="nav-link" href="#awards">AWARDS</a></li>
             <li><a class="nav-link" href="#footer">CONTACT</a></li>
@@ -75,7 +78,15 @@
 
       <!-- ===================== HERO ===================== -->
       <section class="header-container">
-        <img class="profile-image" src="assets/profile-image.jpg" alt="Lasan Perera" />
+        <div
+          class="hex-avatar"
+          id="hexAvatar"
+          role="img"
+          aria-label="Lasan Perera"
+          data-src="assets/profile-image.jpg"
+        >
+          <img class="profile-image-fallback" src="assets/profile-image.jpg" alt="Lasan Perera" />
+        </div>
         <h1>Hi, I'm Lasan</h1>
 
         <div class="content-text">
@@ -96,15 +107,15 @@
 
         <div class="stats">
           <div class="stat">
-            <strong>2&times;</strong>
+            <strong data-count="2" data-suffix="&times;">0</strong>
             <span>Competition Champion</span>
           </div>
           <div class="stat">
-            <strong>9</strong>
+            <strong data-count="9">0</strong>
             <span>Robotics &amp; Ideathon Finals</span>
           </div>
           <div class="stat">
-            <strong>10+</strong>
+            <strong data-count="10" data-suffix="+">0</strong>
             <span>Hardware Projects</span>
           </div>
         </div>
@@ -228,6 +239,17 @@
       </div>
     </section>
 
+    <!-- ===================== PUBLICATIONS ===================== -->
+    <section id="publications" class="container section">
+      <div class="division"></div>
+      <div class="content-text">
+        <h2>Publications</h2>
+        <p>Papers and articles I've authored or contributed to.</p>
+      </div>
+
+      <!-- Publication entries go here -->
+    </section>
+
     <!-- ===================== PROJECTS ===================== -->
     <section id="projects" class="project-container container">
       <div class="division"></div>
@@ -261,7 +283,7 @@
         </div>
         
         <!-- PROJECT CARD 2 -->
-        <div class="card" style="background-image: url('assets/project/line\ Follower.png')">
+        <div class="card" style="background-image: url('assets/project/line\ Follower.jpg')">
           <i class="fas fa-wave-square card-watermark"></i>
           <div class="project-info">
             <div class="project-bio">
@@ -282,7 +304,7 @@
         </div>
 
         <!-- PROJECT CARD 3 -->
-        <div class="card" style="background-image: url('assets/project/medihelp.png')">
+        <div class="card" style="background-image: url('assets/project/medihelp.jpg')">
           <i class="fas fa-heartbeat card-watermark"></i>
           <div class="project-info">
             <div class="project-bio">
@@ -434,7 +456,7 @@
         </div>
 
         <!-- PROJECT CARD 9 -->
-        <div class="card" style="background-image: url('assets/project/marshmellow.png')">
+        <div class="card" style="background-image: url('assets/project/marshmellow.jpg')">
           <i class="fas fa-robot card-watermark"></i>
           <div class="project-info">
             <div class="project-bio">
@@ -476,7 +498,7 @@
         </div>
 
         <!-- PROJECT CARD 11 -->
-        <div class="card" style="background-image: url('assets/project/Analog\ speed\ controller.png')">
+        <div class="card" style="background-image: url('assets/project/Analog\ speed\ controller.jpg')">
           <i class="fas fa-tachometer-alt card-watermark"></i>
           <div class="project-info">
             <div class="project-bio">
@@ -617,6 +639,10 @@
         <p>Copyright &copy; Lasan Perera <span id="datee"></span>, All rights reserved</p>
       </div>
     </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script src="js/script.js"></script>
   </body>

@@ -71,9 +71,57 @@ body {
 /* Keyboard focus outline (accessibility) */
 a:focus-visible,
 .hamburger:focus-visible,
+.hex-avatar:focus-visible,
+.back-to-top:focus-visible,
 label:focus-visible {
   outline: 3px solid var(--primary-color);
   outline-offset: 3px;
+}
+
+/* ---------------- Scroll progress bar ---------------- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: var(--primary-color);
+  z-index: 30;
+  transition: width 0.1s linear;
+}
+
+/* ---------------- Back to top button ---------------- */
+.back-to-top {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  color: var(--bg-primary);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  z-index: 20;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  opacity: 0.85;
 }
 
 /* ---------------- Navbar ---------------- */
@@ -113,8 +161,27 @@ label:focus-visible {
   letter-spacing: 0.03em;
 }
 
+.navbar .nav-link:not(.btn) {
+  position: relative;
+}
+
+.navbar .nav-link:not(.btn)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: var(--primary-color);
+  transition: width 0.3s ease-in-out;
+}
+
 .navbar .nav-link:not(.btn):hover {
   color: var(--primary-color);
+}
+
+.navbar .nav-link:not(.btn):hover::after {
+  width: 100%;
 }
 
 .navbar #logo img {
@@ -157,10 +224,49 @@ label:focus-visible {
   font-size: 2.2rem;
 }
 
-.profile-image {
+/* ---------------- Honeycomb profile picture ---------------- */
+.hex-avatar {
+  position: relative;
+  margin: 0 auto;
   width: 150px;
+  height: 150px;
+}
+
+/* Plain circular photo shown until (and unless) JS assembles the mosaic */
+.profile-image-fallback {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
   border-radius: 50%;
+}
+
+.hex-avatar.built .profile-image-fallback {
+  display: none;
+}
+
+.hex-avatar.active {
   animation: bounce 1.6s infinite alternate ease-in-out;
+  animation-delay: 2s;
+}
+
+.hex-tile {
+  position: absolute;
+  background-repeat: no-repeat;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  opacity: 0;
+  transform: translate(var(--dx), var(--dy)) rotate(var(--drot)) scale(0.3);
+  transition: transform 2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.1s ease-in;
+  transition-delay: var(--delay, 0s);
+}
+
+.hex-avatar.active .hex-tile {
+  opacity: 1;
+  transform: translate(0, 0) rotate(0deg) scale(1);
+}
+
+/* Instantly snaps tiles back to their scattered start so replay animates cleanly */
+.hex-avatar.resetting .hex-tile {
+  transition: none;
 }
 
 @keyframes bounce {
@@ -350,6 +456,7 @@ label:focus-visible {
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: minmax(250px, auto);
   grid-gap: 0.9rem;
+  perspective: 1200px;
 }
 
 /* ---------------- Awards ---------------- */
@@ -556,6 +663,54 @@ label:focus-visible {
   .timeline-item::before {
     left: -2.03rem;
   }
+}
+
+/* ---------------- Scroll reveal ---------------- */
+/* Hidden state only applies once js-enabled is set, so content
+   still shows normally if JavaScript fails to load. */
+.js-enabled .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.reveal {
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  transform: translateX(-32px);
+}
+
+.reveal-left.active {
+  transform: translateX(0);
+}
+
+.reveal-right {
+  transform: translateX(32px);
+}
+
+.reveal-right.active {
+  transform: translateX(0);
+}
+
+/* Project cards: scale + 3D tilt in, cascading row by row via --reveal-delay */
+.js-enabled .reveal-3d {
+  transform: translateY(40px) scale(0.85) rotateX(18deg);
+  transform-origin: top center;
+}
+
+.reveal-3d {
+  transition-duration: 0.8s;
+}
+
+.reveal-3d.active {
+  transform: translateY(0) scale(1) rotateX(0deg);
 }
 
 /* Respect users who prefer reduced motion */
