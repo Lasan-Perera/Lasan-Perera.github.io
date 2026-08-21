@@ -347,3 +347,75 @@ if (statEls.length && "IntersectionObserver" in window) {
 } else {
   statEls.forEach((el) => animateCount(el));
 }
+
+/* ---------- Bonus: project image lightbox ---------- */
+const lightbox = document.querySelector("#lightbox");
+const lightboxImg = document.querySelector("#lightboxImg");
+const lightboxCaption = document.querySelector("#lightboxCaption");
+const lightboxClose = document.querySelector("#lightboxClose");
+let lightboxTrigger = null;
+
+function extractCardImageUrl(card) {
+  const bg = card.style.backgroundImage;
+  const match = bg && bg.match(/url\(["']?(.*?)["']?\)/);
+  return match ? match[1] : null;
+}
+
+function openLightbox(url, caption, trigger) {
+  if (!lightbox || !lightboxImg) return;
+  lightboxImg.src = url;
+  lightboxImg.alt = caption;
+  if (lightboxCaption) lightboxCaption.textContent = caption;
+  lightbox.classList.add("open");
+  lightbox.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+  lightboxTrigger = trigger;
+  if (lightboxClose) lightboxClose.focus();
+}
+
+function closeLightbox() {
+  if (!lightbox) return;
+  lightbox.classList.remove("open");
+  lightbox.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+  if (lightboxTrigger) lightboxTrigger.focus();
+}
+
+document.querySelectorAll("#projects .card").forEach((card) => {
+  const url = extractCardImageUrl(card);
+  if (!url) return;
+
+  card.classList.add("has-photo");
+  card.setAttribute("tabindex", "0");
+  card.setAttribute("role", "button");
+
+  const title = card.querySelector(".project-bio h3");
+  const caption = title ? title.textContent.trim() : "";
+
+  function trigger(e) {
+    if (e.target.closest(".project-link")) return;
+    openLightbox(url, caption, card);
+  }
+
+  card.addEventListener("click", trigger);
+  card.addEventListener("keydown", (e) => {
+    if ((e.key === "Enter" || e.key === " ") && !e.target.closest(".project-link")) {
+      e.preventDefault();
+      openLightbox(url, caption, card);
+    }
+  });
+});
+
+if (lightboxClose) lightboxClose.addEventListener("click", closeLightbox);
+
+if (lightbox) {
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && lightbox && lightbox.classList.contains("open")) {
+    closeLightbox();
+  }
+});
