@@ -419,3 +419,13 @@ document.addEventListener("keydown", (e) => {
     closeLightbox();
   }
 });
+
+/* ---------- Bonus: a little something for anyone poking at devtools ---------- */
+console.log(
+  "%cHi, fellow engineer 👋",
+  "font-size: 18px; font-weight: bold; color: #ffcd42;"
+);
+console.log(
+  "%cLooking under the hood? I like that.\nLet's build something — lasanperera.lsp@gmail.com",
+  "font-size: 13px; color: #a8a8a8;"
+);

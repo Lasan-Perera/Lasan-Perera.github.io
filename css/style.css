@@ -56,6 +56,17 @@ ul {
   list-style: none;
 }
 
+/* Self-hosted icons (inline SVGs, swapped in for Font Awesome's webfont) —
+   sized/colored the same way the old <i class="fas ..."> glyphs were, so every
+   existing font-size/color rule targeting .fas/.fab keeps working unchanged. */
+svg.fas,
+svg.fab {
+  height: 1em;
+  width: 1em;
+  vertical-align: -0.125em;
+  fill: currentColor;
+}
+
 a {
   text-decoration: none;
   color: var(--text-color);
@@ -453,7 +464,7 @@ label:focus-visible {
   margin-bottom: 0.9rem;
 }
 
-.skill-group h3 i {
+.skill-group h3 svg {
   color: var(--primary-color);
   margin-right: 0.4rem;
 }
