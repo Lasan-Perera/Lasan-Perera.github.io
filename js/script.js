@@ -348,10 +348,13 @@ if (statEls.length && "IntersectionObserver" in window) {
   statEls.forEach((el) => animateCount(el));
 }
 
-/* ---------- Bonus: project image lightbox ---------- */
+/* ---------- Bonus: project image + details lightbox ---------- */
 const lightbox = document.querySelector("#lightbox");
 const lightboxImg = document.querySelector("#lightboxImg");
-const lightboxCaption = document.querySelector("#lightboxCaption");
+const lightboxTitle = document.querySelector("#lightboxTitle");
+const lightboxTech = document.querySelector("#lightboxTech");
+const lightboxDesc = document.querySelector("#lightboxDesc");
+const lightboxGithub = document.querySelector("#lightboxGithub");
 const lightboxClose = document.querySelector("#lightboxClose");
 let lightboxTrigger = null;
 
@@ -361,11 +364,14 @@ function extractCardImageUrl(card) {
   return match ? match[1] : null;
 }
 
-function openLightbox(url, caption, trigger) {
+function openLightbox(project, trigger) {
   if (!lightbox || !lightboxImg) return;
-  lightboxImg.src = url;
-  lightboxImg.alt = caption;
-  if (lightboxCaption) lightboxCaption.textContent = caption;
+  lightboxImg.src = project.image;
+  lightboxImg.alt = project.title;
+  if (lightboxTitle) lightboxTitle.textContent = project.title;
+  if (lightboxTech) lightboxTech.textContent = project.tech;
+  if (lightboxDesc) lightboxDesc.textContent = project.description;
+  if (lightboxGithub) lightboxGithub.href = project.githubUrl || "";
   lightbox.classList.add("open");
   lightbox.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
@@ -389,19 +395,29 @@ document.querySelectorAll("#projects .card").forEach((card) => {
   card.setAttribute("tabindex", "0");
   card.setAttribute("role", "button");
 
-  const title = card.querySelector(".project-bio h3");
-  const caption = title ? title.textContent.trim() : "";
+  const titleEl = card.querySelector(".project-bio h3");
+  const techEl = card.querySelector(".project-bio p");
+  const descEl = card.querySelector(".card-detail");
+  const githubEl = card.querySelector(".project-link a");
+
+  const project = {
+    image: url,
+    title: titleEl ? titleEl.textContent.trim() : "",
+    tech: techEl ? techEl.textContent.trim() : "",
+    description: descEl ? descEl.textContent.trim() : "",
+    githubUrl: githubEl ? githubEl.href : "",
+  };
 
   function trigger(e) {
     if (e.target.closest(".project-link")) return;
-    openLightbox(url, caption, card);
+    openLightbox(project, card);
   }
 
   card.addEventListener("click", trigger);
   card.addEventListener("keydown", (e) => {
     if ((e.key === "Enter" || e.key === " ") && !e.target.closest(".project-link")) {
       e.preventDefault();
-      openLightbox(url, caption, card);
+      openLightbox(project, card);
     }
   });
 });
