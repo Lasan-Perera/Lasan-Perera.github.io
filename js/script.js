@@ -636,6 +636,42 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
+/* ---------- Contact details modal ---------- */
+const contactModal = document.querySelector("#contactModal");
+const contactModalOpen = document.querySelector("#contactModalOpen");
+const contactModalClose = document.querySelector("#contactModalClose");
+
+function openContactModal() {
+  if (!contactModal) return;
+  contactModal.classList.add("open");
+  contactModal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+  if (contactModalClose) contactModalClose.focus();
+}
+
+function closeContactModal() {
+  if (!contactModal) return;
+  contactModal.classList.remove("open");
+  contactModal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+  if (contactModalOpen) contactModalOpen.focus();
+}
+
+if (contactModalOpen) contactModalOpen.addEventListener("click", openContactModal);
+if (contactModalClose) contactModalClose.addEventListener("click", closeContactModal);
+
+if (contactModal) {
+  contactModal.addEventListener("click", (e) => {
+    if (e.target === contactModal) closeContactModal();
+  });
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && contactModal && contactModal.classList.contains("open")) {
+    closeContactModal();
+  }
+});
+
 /* ---------- Bonus: a little something for anyone poking at devtools ---------- */
 console.log(
   "%cHi, fellow engineer 👋",

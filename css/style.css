@@ -228,8 +228,45 @@ label:focus-visible {
   object-fit: contain;
 }
 
-.lightbox-panel.no-media {
+.lightbox-panel.no-media,
+.lightbox-panel.contact-panel {
   max-width: 640px;
+}
+
+/* ---------------- Contact modal ---------------- */
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-row a {
+  flex: 1;
+  min-width: 0;
+  color: #ffffff;
+  font-size: 0.92rem;
+  word-break: break-word;
+}
+
+.contact-row a:hover {
+  color: var(--primary-color);
+}
+
+.contact-row-icon {
+  color: var(--primary-color);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.contact-location {
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  color: #a8a8a8;
 }
 
 .lightbox-info {
@@ -356,6 +393,7 @@ label:focus-visible {
 .lightbox-link svg {
   width: 0.85em;
   height: 0.85em;
+  fill: currentColor;
 }
 
 /* ---------------- Navbar ---------------- */
@@ -393,6 +431,13 @@ label:focus-visible {
   font-size: 0.8rem;
   font-weight: var(--weight-semibold);
   letter-spacing: 0.03em;
+}
+
+/* Reset native <button> chrome so #contactModalOpen matches the <a>.nav-link buttons */
+button.nav-link {
+  background: transparent;
+  font-family: inherit;
+  cursor: pointer;
 }
 
 .navbar .nav-link:not(.btn) {
@@ -965,6 +1010,16 @@ label:focus-visible {
 
   .lightbox-info {
     overflow-y: visible;
+    padding: 1.5rem;
+  }
+
+  .contact-row {
+    padding: 0.75rem 0.8rem;
+    gap: 0.5rem;
+  }
+
+  .contact-row a {
+    font-size: 0.85rem;
   }
 
   .navbar .nav-menu {
