@@ -53,7 +53,6 @@
 
           <ul class="nav-menu">
             <li><a class="nav-link" href="#about">ABOUT</a></li>
-            <li><a class="nav-link" href="#publications">PUBLICATIONS</a></li>
             <li><a class="nav-link" href="#projects">PROJECTS</a></li>
             <li><a class="nav-link" href="#awards">AWARDS</a></li>
             <li><a class="nav-link" href="#footer">CONTACT</a></li>
@@ -137,7 +136,7 @@
           I work at the point where hardware meets code. Most of my projects start with a blank
           schematic in Altium and end with firmware running on an STM32 or ESP32 &mdash; motor
           drivers, sensor arrays, control loops and the PCBs that carry them. Right now I'm an
-          Electronics &amp; Embedded Engineer at RYSERA Innovations and I'm heading toward robotics,
+          Electronics &amp; R&amp;D Engineer at RYSERA Innovations and I'm heading toward robotics,
           computer vision and autonomous systems.
         </p>
       </div>
@@ -196,12 +195,12 @@
       <div class="timeline">
         <div class="timeline-item">
           <span class="timeline-date">Dec 2025 &ndash; Present</span>
-          <h3>Electronics &amp; Embedded Engineer</h3>
+          <h3>Electronics &amp; R&amp;D Engineer</h3>
           <h4>RYSERA Innovations &middot; Part Time</h4>
           <p>
-            Designed and developed the embedded control system for "Drop To Print", a 3D printing
-            automation project. Designed custom PCBs and implemented firmware for microcontroller
-            based motion and system control.
+            Developed drones and autonomous navigation systems, covering flight control electronics,
+            sensor integration and onboard navigation software. Conducted STEM education sessions on
+            robotics and embedded systems, preparing course material and hands-on lab exercises.
           </p>
         </div>
 
@@ -245,7 +244,8 @@
       </div>
     </section>
 
-    <!-- ===================== PUBLICATIONS ===================== -->
+    <!-- ===================== PUBLICATIONS =====================
+    Re-enable once the paper is accepted on arXiv.
     <section id="publications" class="container section">
       <div class="division"></div>
       <div class="content-text">
@@ -253,8 +253,55 @@
         <p>Papers and articles I've authored or contributed to.</p>
       </div>
 
-      <!-- Publication entries go here -->
+      <div class="publications">
+        <article class="publication">
+          <span class="publication-status">Preprint &middot; Under Review</span>
+          <h3 class="publication-title">
+            Reproducible Vision-Guided 6-DOF Robotic Manipulator with a Mixed Stepper-Driver
+            Architecture and Browser-Native Control
+          </h3>
+          <p class="publication-authors">
+            <strong>W.A.L.S. Perera</strong>, S.A.D. Priyadarshana, D.N. Pitiwaduge, A.D.I.D. Arachchi,
+            D.M. Colambage &mdash; Dept. of Electronic &amp; Telecommunication Engineering, University
+            of Moratuwa
+          </p>
+          <p class="publication-desc">
+            Design and reproducibility study for the NeuralNexus Arm, an open, low-cost 6-DOF
+            manipulator built around a single STM32H743 controller that mixes onboard TMC2209 drivers
+            with external closed-loop drivers across the arm's six joints. Covers the mechanical
+            design, mixed stepper-driver electronics, interrupt-driven firmware, a MATLAB-based inverse
+            kinematics pipeline, a browser-native control interface built on the Web Serial API, and a
+            colour-segmentation vision pipeline for autonomous pick-and-place.
+          </p>
+          <div class="publication-links">
+            <a
+              href="https://github.com/Lasan-Perera/6-dof-arm-neuralnexus/releases/tag/v1.0"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outline"
+              >Design Files &amp; CAD</a
+            >
+            <a
+              href="https://github.com/Lasan-Perera/neuralnexusarm-codebase"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outline"
+              >Firmware</a
+            >
+            <a
+              href="https://youtube.com/shorts/Jsz-jFdT3wY"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Watch demo video on YouTube"
+              class="publication-video"
+              ><svg class="fab fa-youtube" viewBox="0 0 576 512" aria-hidden="true" focusable="false"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg
+              >Watch Demo</a
+            >
+          </div>
+        </article>
+      </div>
     </section>
+    ===================== -->
 
     <!-- ===================== PROJECTS ===================== -->
     <section id="projects" class="project-container container">

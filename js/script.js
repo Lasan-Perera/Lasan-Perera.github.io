@@ -262,6 +262,7 @@ const revealGroups = [
   { selector: "#about .content-text", direction: "" },
   { selector: "#about .skill-group", direction: "" },
   { selector: "#publications .content-text", direction: "" },
+  { selector: ".publication", direction: "" },
   { selector: "#experience .content-text", direction: "" },
   { selector: ".timeline-item", direction: "reveal-left" },
   { selector: "#projects .content-text", direction: "" },
