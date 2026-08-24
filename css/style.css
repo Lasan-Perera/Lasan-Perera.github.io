@@ -90,7 +90,7 @@ a:focus-visible,
 .hex-avatar:focus-visible,
 .back-to-top:focus-visible,
 .copy-btn:focus-visible,
-.card.has-photo:focus-visible,
+.card.is-clickable:focus-visible,
 .lightbox-close:focus-visible,
 label:focus-visible {
   outline: 3px solid var(--primary-color);
@@ -168,7 +168,7 @@ label:focus-visible {
 }
 
 /* ---------------- Project image lightbox ---------------- */
-.card.has-photo {
+.card.is-clickable {
   cursor: zoom-in;
 }
 
@@ -217,11 +217,19 @@ label:focus-visible {
   justify-content: center;
 }
 
+.lightbox-media[hidden] {
+  display: none;
+}
+
 .lightbox-media img {
   width: 100%;
   height: 100%;
   max-height: 85vh;
   object-fit: contain;
+}
+
+.lightbox-panel.no-media {
+  max-width: 640px;
 }
 
 .lightbox-info {
@@ -252,15 +260,6 @@ label:focus-visible {
   margin-top: 1.1rem;
 }
 
-.lightbox-github {
-  margin-top: 1.5rem;
-  align-self: flex-start;
-}
-
-.lightbox-github[href=""] {
-  display: none;
-}
-
 .lightbox-close {
   position: fixed;
   top: 1.25rem;
@@ -281,6 +280,82 @@ label:focus-visible {
 
 .lightbox-close:hover {
   background: rgba(255, 255, 255, 0.2);
+}
+
+.lightbox-badge {
+  align-self: flex-start;
+  font-size: 0.72rem;
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.3rem 0.8rem;
+  border-radius: 30px;
+  background: rgba(255, 205, 66, 0.14);
+  color: var(--primary-color);
+  border: 1px solid rgba(255, 205, 66, 0.35);
+  margin-bottom: 0.75rem;
+}
+
+.lightbox-highlights {
+  margin-top: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.lightbox-highlights li {
+  position: relative;
+  padding-left: 1.3rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: #d9d9d9;
+}
+
+.lightbox-highlights li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary-color);
+}
+
+.lightbox-tags {
+  margin-top: 1.25rem;
+}
+
+.lightbox-tags li {
+  color: #d9d9d9;
+  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.lightbox-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+
+.lightbox-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.lightbox-link:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.lightbox-link svg {
+  width: 0.85em;
+  height: 0.85em;
 }
 
 /* ---------------- Navbar ---------------- */

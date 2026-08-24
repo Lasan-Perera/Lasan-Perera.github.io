@@ -352,12 +352,165 @@ if (statEls.length && "IntersectionObserver" in window) {
 /* ---------- Bonus: project image + details lightbox ---------- */
 const lightbox = document.querySelector("#lightbox");
 const lightboxImg = document.querySelector("#lightboxImg");
+const lightboxBadge = document.querySelector("#lightboxBadge");
 const lightboxTitle = document.querySelector("#lightboxTitle");
 const lightboxTech = document.querySelector("#lightboxTech");
 const lightboxDesc = document.querySelector("#lightboxDesc");
-const lightboxGithub = document.querySelector("#lightboxGithub");
+const lightboxHighlights = document.querySelector("#lightboxHighlights");
+const lightboxTags = document.querySelector("#lightboxTags");
+const lightboxLinks = document.querySelector("#lightboxLinks");
 const lightboxClose = document.querySelector("#lightboxClose");
 let lightboxTrigger = null;
+
+// Small inline icons for the link buttons in the detail view — kept minimal
+// so we don't need a brand icon for every possible host (Drive, Canva, ...).
+const LIGHTBOX_LINK_ICONS = {
+  github:
+    '<svg viewBox="0 0 496 512" aria-hidden="true" focusable="false"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>',
+  youtube:
+    '<svg viewBox="0 0 576 512" aria-hidden="true" focusable="false"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>',
+  link:
+    '<svg viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M432 320h-32a16 16 0 0 0 -16 16V456H64V152H208a16 16 0 0 0 16-16V104a16 16 0 0 0 -16-16H48A48 48 0 0 0 0 136V464a48 48 0 0 0 48 48H376a48 48 0 0 0 48-48V336a16 16 0 0 0 -16-16zM488 0H360c-21.37 0-32.05 25.91-17 41l35.73 35.73L135.29 320.29a24 24 0 0 0 0 33.94l22.48 22.48a24 24 0 0 0 33.94 0L435.28 133.28 471 169c15.06 15.06 41 4.38 41-17V24A24 24 0 0 0 488 0z"/></svg>',
+};
+
+// Curated write-ups pulled from each project's README / the CV — keyed by
+// the exact title shown on the card. Anything not listed here still opens
+// the lightbox with whatever the card itself has (title/tech/description
+// scraped from the DOM, plus a single GitHub link if the card has one).
+const PROJECT_DETAILS = {
+  "6-DOF Robotic Arm": {
+    badge: "Active Development",
+    stack: ["STM32H743", "SolidWorks", "Altium Designer", "MATLAB / Simscape", "Web Serial API", "AS5047P Encoders"],
+    highlights: [
+      "Tiered motor strategy: NEMA 23/24 with closed-loop CL57T/DM542 drivers on the high-torque base joints, NEMA 17 with silent TMC2209 drivers on the wrist.",
+      "A single command drives the physical arm and a Simscape Multibody digital twin simultaneously, in sync, in real time.",
+      "AS5047P absolute encoders on all six joints close the loop over SPI; a 2 kHz control loop runs on the STM32H743 at 420 MHz.",
+      "Browser-native control panel built on the Web Serial API — no drivers or desktop app required.",
+    ],
+    links: [
+      { label: "Design Files & CAD", href: "https://github.com/Lasan-Perera/6-dof-arm-neuralnexus/releases/tag/v1.0", icon: "github" },
+      { label: "Firmware Repo", href: "https://github.com/Lasan-Perera/neuralnexusarm-codebase", icon: "github" },
+      { label: "Pick & Place Demo", href: "https://drive.google.com/file/d/1faK7I7ZX_agUlC0IrAXy0S09C4y3s5h2/view?usp=sharing", icon: "link" },
+      { label: "Full Progress Video", href: "https://drive.google.com/file/d/1Re87R6V8fl_Va-D2lkvHRHDZWcIKDiEP/view?usp=drive_link", icon: "link" },
+    ],
+  },
+  "Fully Analog Line Follower": {
+    stack: ["TCRT5000 x8", "LM324 Op-amps", "L293D", "4-Layer PCB"],
+    highlights: [
+      "Tracks a 3 cm white line on black with zero microcontroller and zero lines of code — every stage is discrete analog electronics.",
+      "8-sensor IR array feeds a weighted-summation error signal: (weighted right) minus (weighted left).",
+      "Analog PD control — the proportional term corrects position error, the derivative term damps oscillation.",
+      "Fully analog PWM: a Schmitt-trigger/integrator triangular-wave generator compared against the control voltage, diode-clamped to a unipolar drive signal.",
+      "4-layer PCB with a dedicated ground plane and separated motor-power routing to keep the analog stages quiet.",
+    ],
+    links: [{ label: "GitHub Repo", href: "https://github.com/Lasan-Perera/fully-analog-line-follower", icon: "github" }],
+  },
+  "Smart Infusion Pump Monitor": {
+    badge: "Finalist — Startup Spark 2.0 & Pitch Arena 2025",
+    stack: ["ESP32", "Python (REST API)", "React.js", "OLED + 7-Segment"],
+    highlights: [
+      "IR beam-interruption drop sensing, chosen after evaluating a vision-based approach against frame-rate, optics and MCU limits.",
+      "Interrupt-driven firmware: real-time drops-per-minute calculation, circular buffering, non-blocking three-state alarm (Normal / Warning / Critical).",
+      "IoT dashboard for ward-level visibility — live graphs and historical logging over Wi-Fi, aimed at resource-limited hospital settings.",
+      "Battery-backed operation via TP4056 charging, in a custom 3D-printed enclosure.",
+    ],
+    links: [{ label: "GitHub Repo", href: "https://github.com/Lasan-Perera/adaptive-gravity-based-infusion-pump", icon: "github" }],
+  },
+  "Multi-Task Autonomous Robot — SLRC 2026": {
+    badge: "Champions — Sri Lanka Robotics Challenge 2026",
+    stack: ["4-DOF Arm", "AprilTag Detection", "Colour Sorting", "Wall Navigation"],
+    highlights: [
+      "Complete hardware platform designed from scratch for the 2026 competition arena.",
+      "4-DOF robotic arm with an onboard box-storage unit for pick, sort and place tasks.",
+      "Detects and sorts boxes by colour, reads AprilTags for identification and task sequencing, and navigates by wall-following.",
+      "Won the Championship of Sri Lanka Robotics Challenge 2026, organised by the University of Moratuwa.",
+    ],
+    links: [{ label: "GitHub Profile", href: "https://github.com/Lasan-Perera", icon: "github" }],
+  },
+  "Multi-Task Autonomous Robot — SLRC 2025": {
+    badge: "Finalists — Sri Lanka Robotics Challenge 2025",
+    stack: ["2-DOF Arm", "Water System", "Colour Sorting", "Grid Following"],
+    highlights: [
+      "Complete hardware platform combining a 2-DOF robotic arm with a water storage unit and pumping arm.",
+      "Grabs, stores and sorts ping-pong balls by colour while following a grid and detecting walls.",
+      "Finalists at Sri Lanka Robotics Challenge 2025, organised by the University of Moratuwa.",
+    ],
+    links: [{ label: "GitHub Profile", href: "https://github.com/Lasan-Perera", icon: "github" }],
+  },
+  "Reconfigurable Mobile Robot": {
+    stack: ["ROS 2 Humble", "ros2_control", "Gazebo", "Nav2 (planned)"],
+    highlights: [
+      "Physically reconfigures between a wide 4-wheel stance and a compact 2-wheel differential-drive stance by folding an actuated wheel pair.",
+      "Each folding wheel is a two-joint kinematic chain — a hinge fold joint (0–90°) kept separate from the continuous drive/spin joint — so folding and driving never conflict.",
+      "A dedicated ROS 2 node sequences reconfiguration: deactivate the active drive controller, command the fold joints, wait for completion, then activate the matching controller via ros2_control's switch_controller service.",
+      "Modular URDF/Xacro description and Gazebo physics built from scratch; a SLAM + Nav2 navigation pipeline is in progress.",
+    ],
+    links: [{ label: "GitHub Repo", href: "https://github.com/Lasan-Perera/reconfigurable-mobile-robot", icon: "github" }],
+  },
+  "DropToPrint — 3D Printer WiFi Automation": {
+    stack: ["ESP32-S3", "ESP-IDF", "USB OTG (CDC-ACM VCP)", "Custom SMD PCB"],
+    highlights: [
+      "Adds WiFi connectivity and automation to legacy, non-networked 3D printers without any extra external hardware.",
+      "Firmware written in ESP-IDF using USB OTG in CDC-ACM VCP mode, so the ESP32-S3 talks to the printer's existing serial protocol directly.",
+      "Web-based UI for remote control, paired with a fully SMD, market-ready PCB design.",
+    ],
+    links: [{ label: "GitHub Profile", href: "https://github.com/Lasan-Perera", icon: "github" }],
+  },
+  "MazeRunner V1–V3 — Micromouse Robot": {
+    badge: "Champions — MazeMaster 2026",
+    stack: ["STM32F411CEU6", "ICM-20602 IMU", "Encoder Motors", "Custom PCB"],
+    highlights: [
+      "Three hardware generations (V1–V3) built for speed, stability and accurate maze-solving.",
+      "Complete hardware platform — motor drivers, PCB and an STM32F411CEU6 — integrated with encoder motors and an ICM-20602 IMU for fast, sharp-turn runs.",
+      "Champions, MazeMaster 2026. 1st runner-up, InnovMind 2026. 2nd runner-up, MicroMaze 2.0 and RoboFest 2025.",
+    ],
+    links: [{ label: "GitHub Profile", href: "https://github.com/Lasan-Perera", icon: "github" }],
+  },
+  "Project Phoenix — Cube Satellite": {
+    badge: "Ongoing",
+    stack: ["ADCS", "High-Altitude Balloon"],
+    highlights: [
+      "Stage 1 launches a high-altitude balloon into the stratosphere as a precursor test platform.",
+      "Batch coordinator for the project, and a member of the Attitude Determination and Control Subsystem (ADCS) team.",
+    ],
+    links: [{ label: "GitHub Profile", href: "https://github.com/Lasan-Perera", icon: "github" }],
+  },
+  "Multi-Task Autonomous Robot (EN2533)": {
+    stack: ["Arduino Mega", "NEMA 17 + DRV8825", "TCS34725", "C++"],
+    highlights: [
+      "Built for EN2533 Robot Design and Competition — challenges announced two months out: line following, maze solving, box handling, ramp climbing, dashed-line navigation, barcode detection, ball pickup, wall following, arrow-based navigation and ball shooting.",
+      "Hardware: Arduino Mega Mini, an 8-channel TCRT5000 reflective sensor array, two NEMA 17 steppers on DRV8825 drivers, a TCS34725 colour sensor, five SHARP IR distance sensors and three obstacle-avoidance IR modules.",
+      "C++ firmware built in the Arduino IDE (AccelStepper/MultiStepper, Adafruit TCS34725/SSD1306) driving fully autonomous navigation and task execution.",
+    ],
+    links: [
+      { label: "GitHub Repo", href: "https://github.com/Lasan-Perera/EN2533_Team_MarshMello", icon: "github" },
+      { label: "Watch Demo", href: "https://youtu.be/oBLyfxPuTzA", icon: "youtube" },
+    ],
+  },
+  "Net-Warden — Network Manager": {
+    badge: "Finalist — HackVenture 1.0",
+    stack: ["Node.js", "MySQL", "Ubuntu"],
+    highlights: [
+      "Home/SOHO network manager that monitors per-device usage and throttles connections once they exceed an allocated data limit.",
+      "Node.js backend with a MySQL store for usage history, plus a web interface for setting and reviewing limits.",
+      "Finalist at HackVenture 1.0, organised by the University of Kelaniya.",
+    ],
+    links: [{ label: "GitHub Profile", href: "https://github.com/Lasan-Perera", icon: "github" }],
+  },
+  "Analog PID DC Motor Speed Controller": {
+    stack: ["TL072 Op-amps", "IRLZ44N MOSFET", "Analog PID", "Frequency-to-Voltage"],
+    highlights: [
+      "Closed-loop DC motor speed control with zero microcontrollers or digital signal processing — feedback acquisition through PWM generation is entirely op-amps and discrete power electronics.",
+      "Designed the sensing/feedback stage: a custom frequency-to-voltage converter with a precision rectifier that turns encoder pulses into a proportional analog voltage.",
+      "PWM is generated by a Schmitt-trigger oscillator driving an integrator and voltage comparator; an IRLZ44N logic-level MOSFET drives the motor.",
+      "Built as part of Team Neural Nexus.",
+    ],
+    links: [
+      { label: "GitHub Repo", href: "https://github.com/denethp/fully-analog-dc-motor-speed-controller", icon: "github" },
+      { label: "Project Presentation", href: "https://canva.link/gsjmjxzgy5exvvy", icon: "link" },
+    ],
+  },
+};
 
 function extractCardImageUrl(card) {
   const bg = card.style.backgroundImage;
@@ -365,14 +518,56 @@ function extractCardImageUrl(card) {
   return match ? match[1] : null;
 }
 
+function fillList(el, items, render) {
+  if (!el) return;
+  el.innerHTML = "";
+  const list = items || [];
+  list.forEach((item) => el.appendChild(render(item)));
+  el.hidden = list.length === 0;
+}
+
 function openLightbox(project, trigger) {
   if (!lightbox || !lightboxImg) return;
-  lightboxImg.src = project.image;
-  lightboxImg.alt = project.title;
+  const lightboxPanel = lightbox.querySelector(".lightbox-panel");
+  const lightboxMedia = lightbox.querySelector(".lightbox-media");
+  const hasImage = Boolean(project.image);
+  if (lightboxMedia) lightboxMedia.hidden = !hasImage;
+  if (lightboxPanel) lightboxPanel.classList.toggle("no-media", !hasImage);
+  if (hasImage) {
+    lightboxImg.src = project.image;
+    lightboxImg.alt = project.title;
+  }
   if (lightboxTitle) lightboxTitle.textContent = project.title;
   if (lightboxTech) lightboxTech.textContent = project.tech;
   if (lightboxDesc) lightboxDesc.textContent = project.description;
-  if (lightboxGithub) lightboxGithub.href = project.githubUrl || "";
+
+  if (lightboxBadge) {
+    lightboxBadge.textContent = project.badge || "";
+    lightboxBadge.hidden = !project.badge;
+  }
+
+  fillList(lightboxHighlights, project.highlights, (text) => {
+    const li = document.createElement("li");
+    li.textContent = text;
+    return li;
+  });
+
+  fillList(lightboxTags, project.stack, (text) => {
+    const li = document.createElement("li");
+    li.textContent = text;
+    return li;
+  });
+
+  fillList(lightboxLinks, project.links, (link) => {
+    const a = document.createElement("a");
+    a.href = link.href;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.className = "btn btn-outline lightbox-link";
+    a.innerHTML = `${LIGHTBOX_LINK_ICONS[link.icon] || LIGHTBOX_LINK_ICONS.link} ${link.label}`;
+    return a;
+  });
+
   lightbox.classList.add("open");
   lightbox.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
@@ -390,9 +585,8 @@ function closeLightbox() {
 
 document.querySelectorAll("#projects .card").forEach((card) => {
   const url = extractCardImageUrl(card);
-  if (!url) return;
 
-  card.classList.add("has-photo");
+  card.classList.add("is-clickable");
   card.setAttribute("tabindex", "0");
   card.setAttribute("role", "button");
 
@@ -400,13 +594,18 @@ document.querySelectorAll("#projects .card").forEach((card) => {
   const techEl = card.querySelector(".project-bio p");
   const descEl = card.querySelector(".card-detail");
   const githubEl = card.querySelector(".project-link a");
+  const title = titleEl ? titleEl.textContent.trim() : "";
+  const details = PROJECT_DETAILS[title] || {};
 
   const project = {
     image: url,
-    title: titleEl ? titleEl.textContent.trim() : "",
+    title,
     tech: techEl ? techEl.textContent.trim() : "",
     description: descEl ? descEl.textContent.trim() : "",
-    githubUrl: githubEl ? githubEl.href : "",
+    badge: details.badge,
+    stack: details.stack,
+    highlights: details.highlights,
+    links: details.links || (githubEl ? [{ label: "View on GitHub", href: githubEl.href, icon: "github" }] : []),
   };
 
   function trigger(e) {
