@@ -765,7 +765,9 @@ button.nav-link {
   font-weight: var(--weight-bold);
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--text-color);
+  /* Fixed dark ink, not var(--text-color): the yellow pill keeps its own
+     background in both themes, so the text must too (white on yellow fails). */
+  color: #1a1a1a;
   background: var(--primary-color);
   padding: 0.2rem 0.6rem;
   border-radius: 20px;
@@ -903,7 +905,7 @@ button.nav-link {
 }
 
 .award-gold .award-place {
-  color: var(--text-color);
+  color: #1a1a1a;
   background: var(--primary-color);
   padding: 0.15rem 0.5rem;
   border-radius: 20px;

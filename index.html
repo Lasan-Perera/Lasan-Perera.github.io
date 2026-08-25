@@ -54,6 +54,7 @@
           <ul class="nav-menu">
             <li><a class="nav-link" href="#about">ABOUT</a></li>
             <li><a class="nav-link" href="#experience">EXPERIENCE</a></li>
+            <li><a class="nav-link" href="#publications">PUBLICATIONS</a></li>
             <li><a class="nav-link" href="#projects">PROJECTS</a></li>
             <li><a class="nav-link" href="#awards">AWARDS</a></li>
             <li>
@@ -249,8 +250,7 @@
       </div>
     </section>
 
-    <!-- ===================== PUBLICATIONS =====================
-    Re-enable once the paper is accepted on arXiv.
+    <!-- ===================== PUBLICATIONS ===================== -->
     <section id="publications" class="container section">
       <div class="division"></div>
       <div class="content-text">
@@ -260,25 +260,38 @@
 
       <div class="publications">
         <article class="publication">
-          <span class="publication-status">Preprint &middot; Under Review</span>
+          <span class="publication-status">Preprint &middot; arXiv:2608.22799 [cs.RO] &middot; Aug 2026</span>
           <h3 class="publication-title">
-            Reproducible Vision-Guided 6-DOF Robotic Manipulator with a Mixed Stepper-Driver
+            Reproducible Vision-Guided 6-DoF Robotic Manipulator with a Mixed Stepper-Driver
             Architecture and Browser-Native Control
           </h3>
           <p class="publication-authors">
-            <strong>W.A.L.S. Perera</strong>, S.A.D. Priyadarshana, D.N. Pitiwaduge, A.D.I.D. Arachchi,
-            D.M. Colambage &mdash; Dept. of Electronic &amp; Telecommunication Engineering, University
-            of Moratuwa
+            <strong>Lasan Perera</strong>, Deneth Priyadarshana, Dulana Pitiwaduge, Isitha Dinujaya,
+            Mokshan Colambage &mdash; Dept. of Electronic &amp; Telecommunication Engineering,
+            University of Moratuwa
           </p>
           <p class="publication-desc">
-            Design and reproducibility study for the NeuralNexus Arm, an open, low-cost 6-DOF
-            manipulator built around a single STM32H743 controller that mixes onboard TMC2209 drivers
-            with external closed-loop drivers across the arm's six joints. Covers the mechanical
-            design, mixed stepper-driver electronics, interrupt-driven firmware, a MATLAB-based inverse
-            kinematics pipeline, a browser-native control interface built on the Web Serial API, and a
-            colour-segmentation vision pipeline for autonomous pick-and-place.
+            Design and reproducibility study for the NeuralNexus Arm, an open, low-cost 6-DoF
+            manipulator. A single STM32H743 drives two stepper architectures at once &mdash; onboard
+            TMC2209 drivers on the wrist joints, external CL57T and DM542 drivers on the high-torque
+            proximal joints. Covers the mechanics, firmware, MATLAB/Simscape inverse kinematics,
+            browser-native control over the Web Serial API, and a vision pipeline for pick-and-place.
           </p>
           <div class="publication-links">
+            <a
+              href="https://arxiv.org/abs/2608.22799"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-primary"
+              >Read on arXiv</a
+            >
+            <a
+              href="https://arxiv.org/pdf/2608.22799"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outline"
+              >PDF</a
+            >
             <a
               href="https://github.com/Lasan-Perera/6-dof-arm-neuralnexus/releases/tag/v1.0"
               target="_blank"
@@ -306,7 +319,6 @@
         </article>
       </div>
     </section>
-    ===================== -->
 
     <!-- ===================== PROJECTS ===================== -->
     <section id="projects" class="project-container container">
