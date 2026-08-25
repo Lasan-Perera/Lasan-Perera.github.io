@@ -97,6 +97,60 @@ label:focus-visible {
   outline-offset: 3px;
 }
 
+/* ---------------- Race-car launch on the nav CTAs ---------------- */
+/* A button mid-flight sticks out past the right edge and would otherwise widen
+   the document, giving the page a horizontal scrollbar. `clip` suppresses that
+   without turning <body> into a scroll container the way `hidden` would, and
+   it's scoped to the flight so nothing else is affected. */
+.btn-flying body {
+  overflow-x: clip;
+}
+
+/* Rev backwards a touch, then tear off to the right. The horizontal stretch
+   on the way out stands in for motion blur. */
+.btn-launch {
+  position: relative;
+  z-index: 25;
+  animation: btn-launch 0.5s cubic-bezier(0.45, 0, 0.85, 0.35) forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes btn-launch {
+  0% {
+    transform: translateX(0) scaleX(1);
+  }
+  18% {
+    transform: translateX(-14px) scaleX(0.92);
+  }
+  100% {
+    transform: translateX(90vw) scaleX(1.3);
+    opacity: 0;
+  }
+}
+
+/* Slides back into its slot once the action has fired. */
+.btn-return {
+  animation: btn-return 0.34s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+@keyframes btn-return {
+  from {
+    opacity: 0;
+    transform: translateX(26px) scaleX(1.12);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-launch,
+  .btn-return {
+    animation: none;
+  }
+}
+
 /* ---------------- Scroll progress bar ---------------- */
 .scroll-progress {
   position: fixed;
@@ -518,6 +572,69 @@ button.nav-link {
   margin: 0 auto;
   width: 150px;
   height: 150px;
+}
+
+/* Thin outline offset behind the photo. It's a child of .hex-avatar, so the
+   bounce animation on the parent carries it along with the mosaic.
+   preserveAspectRatio="none" lets it stretch to whatever size JS gives the
+   container; non-scaling-stroke keeps the line an even thickness anyway. */
+.hex-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: var(--primary-color);
+  stroke-width: 1.6;
+  vector-effect: non-scaling-stroke;
+  transform: translate(12px, 12px);
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* Hidden until drawn: one dash the length of the whole perimeter, pushed
+   entirely out of view by an equal offset. */
+.hex-frame polygon {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+
+/* Tiles take 2s to fly in (plus up to 0.3s of stagger), so the outline starts
+   tracing itself just as the mosaic settles, then rides the bounce with it. */
+.hex-avatar.active .hex-frame {
+  opacity: 0.7;
+  transition: opacity 0.3s ease-out 2.1s;
+}
+
+.hex-avatar.active .hex-frame polygon {
+  animation: hex-frame-draw 0.9s cubic-bezier(0.4, 0, 0.2, 1) 2.15s forwards;
+}
+
+@keyframes hex-frame-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Replay resets the dash instantly, matching how the tiles reset */
+.hex-avatar.resetting .hex-frame {
+  transition: none;
+}
+
+.hex-avatar.resetting .hex-frame polygon {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hex-avatar.active .hex-frame {
+    opacity: 0.7;
+    transition: none;
+  }
+
+  .hex-avatar.active .hex-frame polygon {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
 }
 
 /* Plain circular photo shown until (and unless) JS assembles the mosaic */

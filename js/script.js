@@ -657,7 +657,60 @@ function closeContactModal() {
   if (contactModalOpen) contactModalOpen.focus();
 }
 
-if (contactModalOpen) contactModalOpen.addEventListener("click", openContactModal);
+/* ---------- Race-car launch on the nav CTAs ----------
+   The button revs, tears off to the right, then the action fires and it slides
+   back into place. Skipped on the mobile dropdown, where the menu is already
+   sliding away underneath it, and whenever reduced motion is requested. */
+const LAUNCH_MS = 500;
+
+function launchThen(el, action) {
+  if (!el || prefersReducedMotion || window.innerWidth <= 670) {
+    action();
+    return;
+  }
+
+  el.classList.remove("btn-return");
+  el.classList.add("btn-launch");
+  document.documentElement.classList.add("btn-flying"); // suppress h-scrollbar
+
+  setTimeout(() => {
+    action();
+    el.classList.remove("btn-launch");
+    void el.offsetWidth; // reflow, so the return animation restarts cleanly
+    el.classList.add("btn-return");
+    setTimeout(() => {
+      el.classList.remove("btn-return");
+      document.documentElement.classList.remove("btn-flying");
+    }, 400);
+  }, LAUNCH_MS);
+}
+
+if (contactModalOpen) {
+  contactModalOpen.addEventListener("click", () => {
+    launchThen(contactModalOpen, openContactModal);
+  });
+}
+
+const requestCvBtn = document.querySelector('.nav-menu a[href*="drive.google.com"]');
+
+if (requestCvBtn) {
+  requestCvBtn.addEventListener("click", (e) => {
+    // Leave modified clicks (ctrl/cmd/middle) to the browser so "open in new
+    // tab" keeps working.
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    if (prefersReducedMotion || window.innerWidth <= 670) return; // native nav
+
+    e.preventDefault();
+    const url = requestCvBtn.href;
+    launchThen(requestCvBtn, () => {
+      // Opening a tab this long after the click can trip a popup blocker —
+      // fall back to same-tab navigation if it does.
+      const win = window.open(url, "_blank", "noopener");
+      if (!win) window.location.href = url;
+    });
+  });
+}
+
 if (contactModalClose) contactModalClose.addEventListener("click", closeContactModal);
 
 if (contactModal) {
