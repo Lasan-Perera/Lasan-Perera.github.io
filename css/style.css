@@ -761,6 +761,18 @@ button.nav-link {
 }
 
 /* ---------------- Timeline ---------------- */
+/* Experience and Education sit side by side, and fall to one
+   column on their own once each track drops below 300px. */
+.timeline-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 0.5rem 2.5rem;
+}
+
+.timeline-columns .timeline {
+  margin-bottom: 1.5rem;
+}
+
 .timeline {
   border-left: 2px solid var(--card-background);
   margin: 1rem 0 3rem 0.5rem;
@@ -806,6 +818,35 @@ button.nav-link {
   font-size: 0.92rem;
   color: var(--text-muted);
   max-width: 640px;
+}
+
+/* Named projects nested under a role — hollow bullets, no divider lines */
+.timeline-work {
+  margin-top: 0.8rem;
+}
+
+.timeline-work li {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  max-width: 640px;
+  padding: 0.3rem 0 0.3rem 1.1rem;
+  position: relative;
+}
+
+.timeline-work li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.78rem;
+  width: 5px;
+  height: 5px;
+  border: 1px solid var(--primary-color);
+  border-radius: 50%;
+}
+
+.timeline-work strong {
+  color: var(--text-color);
+  font-weight: var(--weight-semibold);
 }
 
 .courses-title {
