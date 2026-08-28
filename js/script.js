@@ -359,6 +359,7 @@ const lightboxDesc = document.querySelector("#lightboxDesc");
 const lightboxHighlights = document.querySelector("#lightboxHighlights");
 const lightboxTags = document.querySelector("#lightboxTags");
 const lightboxLinks = document.querySelector("#lightboxLinks");
+const lightboxVideo = document.querySelector("#lightboxVideo");
 const lightboxClose = document.querySelector("#lightboxClose");
 let lightboxTrigger = null;
 
@@ -380,6 +381,7 @@ const LIGHTBOX_LINK_ICONS = {
 const PROJECT_DETAILS = {
   "6-DOF Robotic Arm": {
     badge: "Active Development",
+    video: "ZcnlmePwU1o",
     stack: ["STM32H743", "SolidWorks", "Altium Designer", "MATLAB / Simscape", "Web Serial API", "AS5047P Encoders"],
     highlights: [
       "Tiered motor strategy: NEMA 23/24 with closed-loop CL57T/DM542 drivers on the high-torque base joints, NEMA 17 with silent TMC2209 drivers on the wrist.",
@@ -530,10 +532,33 @@ function openLightbox(project, trigger) {
   if (!lightbox || !lightboxImg) return;
   const lightboxPanel = lightbox.querySelector(".lightbox-panel");
   const lightboxMedia = lightbox.querySelector(".lightbox-media");
+  const hasVideo = Boolean(project.video);
   const hasImage = Boolean(project.image);
-  if (lightboxMedia) lightboxMedia.hidden = !hasImage;
-  if (lightboxPanel) lightboxPanel.classList.toggle("no-media", !hasImage);
-  if (hasImage) {
+  const hasMedia = hasVideo || hasImage;
+  if (lightboxMedia) lightboxMedia.hidden = !hasMedia;
+  if (lightboxPanel) lightboxPanel.classList.toggle("no-media", !hasMedia);
+
+  // A demo video takes the media slot over the still image. The iframe is
+  // built here rather than in the markup so YouTube is only ever contacted
+  // once someone actually opens the project.
+  lightboxImg.hidden = hasVideo;
+  if (lightboxVideo) {
+    lightboxVideo.hidden = !hasVideo;
+    lightboxVideo.innerHTML = "";
+    if (hasVideo) {
+      const iframe = document.createElement("iframe");
+      iframe.src =
+        "https://www.youtube-nocookie.com/embed/" +
+        project.video +
+        "?autoplay=1&rel=0&modestbranding=1";
+      iframe.title = project.title + " — demo video";
+      iframe.allow =
+        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+      iframe.allowFullscreen = true;
+      lightboxVideo.appendChild(iframe);
+    }
+  }
+  if (hasImage && !hasVideo) {
     lightboxImg.src = project.image;
     lightboxImg.alt = project.title;
   }
@@ -579,6 +604,11 @@ function closeLightbox() {
   if (!lightbox) return;
   lightbox.classList.remove("open");
   lightbox.setAttribute("aria-hidden", "true");
+  // Removing the iframe is what actually halts playback.
+  if (lightboxVideo) {
+    lightboxVideo.innerHTML = "";
+    lightboxVideo.hidden = true;
+  }
   document.body.style.overflow = "";
   if (lightboxTrigger) lightboxTrigger.focus();
 }
@@ -603,6 +633,7 @@ document.querySelectorAll("#projects .card").forEach((card) => {
     tech: techEl ? techEl.textContent.trim() : "",
     description: descEl ? descEl.textContent.trim() : "",
     badge: details.badge,
+    video: details.video,
     stack: details.stack,
     highlights: details.highlights,
     links: details.links || (githubEl ? [{ label: "View on GitHub", href: githubEl.href, icon: "github" }] : []),
