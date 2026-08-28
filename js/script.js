@@ -363,6 +363,53 @@ const lightboxVideo = document.querySelector("#lightboxVideo");
 const lightboxClose = document.querySelector("#lightboxClose");
 let lightboxTrigger = null;
 
+// Builds the click-to-play cover for a video project. The iframe is only
+// created once someone presses play, so the panel opens instantly on the
+// thumbnail and YouTube is never contacted before that.
+function buildVideoFacade(videoId, title) {
+  const poster = document.createElement("img");
+  poster.className = "lightbox-video-poster";
+  poster.alt = "";
+  poster.src = "https://i.ytimg.com/vi/" + videoId + "/maxresdefault.jpg";
+  poster.addEventListener("error", function () {
+    // Not every video has a maxres thumbnail; hqdefault always exists.
+    if (poster.dataset.fallback) return;
+    poster.dataset.fallback = "1";
+    poster.src = "https://i.ytimg.com/vi/" + videoId + "/hqdefault.jpg";
+  });
+
+  const play = document.createElement("button");
+  play.type = "button";
+  play.className = "lightbox-video-play";
+  play.setAttribute("aria-label", "Play " + title + " demo video");
+  play.innerHTML = LIGHTBOX_LINK_ICONS.youtube;
+
+  play.addEventListener("click", function () {
+    const iframe = document.createElement("iframe");
+    iframe.src =
+      "https://www.youtube-nocookie.com/embed/" +
+      videoId +
+      "?autoplay=1&rel=0&modestbranding=1";
+    iframe.title = title + " — demo video";
+    iframe.allow =
+      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+    iframe.allowFullscreen = true;
+
+    // Spinner and dimmed poster stay *behind* the iframe, so they show
+    // through while the player boots and are covered the moment it paints.
+    const spinner = document.createElement("div");
+    spinner.className = "lightbox-video-spinner";
+
+    play.remove();
+    lightboxVideo.classList.add("is-playing");
+    lightboxVideo.appendChild(spinner);
+    lightboxVideo.appendChild(iframe);
+  });
+
+  lightboxVideo.appendChild(poster);
+  lightboxVideo.appendChild(play);
+}
+
 // Small inline icons for the link buttons in the detail view — kept minimal
 // so we don't need a brand icon for every possible host (Drive, Canva, ...).
 const LIGHTBOX_LINK_ICONS = {
@@ -538,24 +585,14 @@ function openLightbox(project, trigger) {
   if (lightboxMedia) lightboxMedia.hidden = !hasMedia;
   if (lightboxPanel) lightboxPanel.classList.toggle("no-media", !hasMedia);
 
-  // A demo video takes the media slot over the still image. The iframe is
-  // built here rather than in the markup so YouTube is only ever contacted
-  // once someone actually opens the project.
+  // A demo video takes the media slot over the still image.
   lightboxImg.hidden = hasVideo;
   if (lightboxVideo) {
     lightboxVideo.hidden = !hasVideo;
     lightboxVideo.innerHTML = "";
+    lightboxVideo.classList.remove("is-playing");
     if (hasVideo) {
-      const iframe = document.createElement("iframe");
-      iframe.src =
-        "https://www.youtube-nocookie.com/embed/" +
-        project.video +
-        "?autoplay=1&rel=0&modestbranding=1";
-      iframe.title = project.title + " — demo video";
-      iframe.allow =
-        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-      iframe.allowFullscreen = true;
-      lightboxVideo.appendChild(iframe);
+      buildVideoFacade(project.video, project.title);
     }
   }
   if (hasImage && !hasVideo) {
@@ -608,6 +645,7 @@ function closeLightbox() {
   if (lightboxVideo) {
     lightboxVideo.innerHTML = "";
     lightboxVideo.hidden = true;
+    lightboxVideo.classList.remove("is-playing");
   }
   document.body.style.overflow = "";
   if (lightboxTrigger) lightboxTrigger.focus();

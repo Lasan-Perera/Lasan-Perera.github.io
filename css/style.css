@@ -294,11 +294,96 @@ label:focus-visible {
   max-height: 85vh;
 }
 
+.lightbox-video {
+  position: relative;
+}
+
 .lightbox-video iframe {
   display: block;
   width: 100%;
   height: 100%;
   border: 0;
+}
+
+/* Click-to-play cover: the panel opens on the video's own thumbnail, so it
+   is never a blank rectangle. The iframe only appears once play is pressed,
+   and sits above the poster and spinner, covering them as soon as it paints. */
+.lightbox-video-poster {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lightbox-video.is-playing .lightbox-video-poster {
+  filter: brightness(0.4);
+}
+
+.lightbox-video iframe {
+  position: relative;
+  z-index: 3;
+}
+
+.lightbox-video-play {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  margin: auto;
+  width: 76px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.65);
+  transition: background 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.lightbox-video-play svg {
+  width: 40px;
+  height: 40px;
+  fill: #ffffff;
+}
+
+.lightbox-video-play:hover,
+.lightbox-video-play:focus-visible {
+  background: #ff0000;
+  transform: scale(1.08);
+}
+
+/* Sits behind the iframe, so it shows through while the player boots
+   and is hidden the moment YouTube paints — no timers involved. */
+.lightbox-video-spinner {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  margin: auto;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.25);
+  border-top-color: var(--primary-color);
+  animation: lightbox-spin 0.8s linear infinite;
+}
+
+@keyframes lightbox-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox-video-spinner {
+    animation-duration: 2.4s;
+  }
+  .lightbox-video-play {
+    transition: none;
+  }
 }
 
 .lightbox-panel.no-media,
