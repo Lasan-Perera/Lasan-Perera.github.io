@@ -427,7 +427,7 @@ const LIGHTBOX_LINK_ICONS = {
 // scraped from the DOM, plus a single GitHub link if the card has one).
 const PROJECT_DETAILS = {
   "6-DOF Robotic Arm": {
-    badge: "Active Development",
+    badge: "Published — arXiv 2026",
     video: "ZcnlmePwU1o",
     stack: ["STM32H743", "SolidWorks", "Altium Designer", "MATLAB / Simscape", "Web Serial API", "AS5047P Encoders"],
     highlights: [
