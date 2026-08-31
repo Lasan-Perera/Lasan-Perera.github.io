@@ -1060,6 +1060,23 @@ button.nav-link {
   max-width: 780px;
 }
 
+/* Citable identifier. The link resolves to the same arXiv page as the button
+   below it, so it is shown as text rather than as a second destination. */
+.publication-doi {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 1.2rem;
+}
+
+.publication-doi a {
+  color: var(--primary-color);
+  word-break: break-all;
+}
+
+.publication-doi a:hover {
+  text-decoration: underline;
+}
+
 .publication-links {
   display: flex;
   flex-wrap: wrap;
