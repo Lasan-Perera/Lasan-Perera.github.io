@@ -386,6 +386,63 @@ label:focus-visible {
   }
 }
 
+/* Research poster — stacked above the details so the landscape poster
+   gets the full panel width; the whole panel scrolls. */
+.lightbox-poster {
+  position: relative;
+  display: block;
+  width: 100%;
+  background: #fff;
+  cursor: zoom-in;
+}
+
+.lightbox-poster[hidden] {
+  display: none;
+}
+
+.lightbox-media .lightbox-poster img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+}
+
+.lightbox-poster-hint {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  font-size: 0.75rem;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+.lightbox-poster:hover .lightbox-poster-hint,
+.lightbox-poster:focus-visible .lightbox-poster-hint {
+  opacity: 1;
+}
+
+.lightbox-panel.has-poster {
+  flex-direction: column;
+  max-width: 1200px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.lightbox-panel.has-poster .lightbox-media {
+  flex: none;
+}
+
+.lightbox-panel.has-poster .lightbox-info {
+  flex: none;
+  overflow-y: visible;
+}
+
 .lightbox-panel.no-media,
 .lightbox-panel.contact-panel {
   max-width: 640px;

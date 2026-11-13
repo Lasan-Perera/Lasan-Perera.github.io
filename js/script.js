@@ -426,6 +426,25 @@ const LIGHTBOX_LINK_ICONS = {
 // the lightbox with whatever the card itself has (title/tech/description
 // scraped from the DOM, plus a single GitHub link if the card has one).
 const PROJECT_DETAILS = {
+  "Engagement-Aware Gesture Control — Quadruped Robot": {
+    badge: "Research — University of Moratuwa × WSO2 · Ongoing",
+    stack: ["Unitree Go2 EDU", "ROS 2 + Docker", "Jetson Orin NX", "RealSense D435i + LiDAR", "YOLOv8", "MediaPipe", "Interval Type-2 Fuzzy Logic"],
+    highlights: [
+      "Solves the crowd problem: gesture pipelines classify the hand but never ask whose hand it is — so a bystander waving at a friend can stop or start the robot.",
+      "YOLOv8 finds people, LiDAR places each one in 3D and a Kalman tracker keeps their ID, speed and uncertainty; distance holds to ~0.3 m against RealSense depth.",
+      "MediaPipe hand landmarks feed an 18-class gesture classifier — 0.864 macro-F1 (±0.018) on 71 unseen people at ~18 fps, with a 10-frame vote to remove flicker.",
+      "Two fuzzy layers per person: engagement from distance, approach speed and gaze, then a decision from engagement and gesture confidence. Tracker uncertainty sets the width of each Type-2 band.",
+      "Safety-biased STOP threshold (0.91 recall), and the robot auto-stops if no hand is seen for 0.5 s. Commands reach /cmd_vel only from an engaged person.",
+    ],
+    poster: {
+      image: "assets/project/robodog-poster.jpg",
+      pdf: "assets/project/robodog-poster.pdf",
+    },
+    links: [
+      { label: "Research Poster (PDF)", href: "assets/project/robodog-poster.pdf", icon: "link" },
+      { label: "View on GitHub", href: "https://github.com/Lasan-Perera", icon: "github" },
+    ],
+  },
   "6-DOF Robotic Arm": {
     badge: "Published — arXiv 2026",
     video: "ZcnlmePwU1o",
@@ -579,14 +598,30 @@ function openLightbox(project, trigger) {
   if (!lightbox || !lightboxImg) return;
   const lightboxPanel = lightbox.querySelector(".lightbox-panel");
   const lightboxMedia = lightbox.querySelector(".lightbox-media");
-  const hasVideo = Boolean(project.video);
+  const lightboxPoster = document.getElementById("lightboxPoster");
+  const hasPoster = Boolean(project.poster && lightboxPoster);
+  const hasVideo = Boolean(project.video) && !hasPoster;
   const hasImage = Boolean(project.image);
-  const hasMedia = hasVideo || hasImage;
+  const hasMedia = hasPoster || hasVideo || hasImage;
   if (lightboxMedia) lightboxMedia.hidden = !hasMedia;
-  if (lightboxPanel) lightboxPanel.classList.toggle("no-media", !hasMedia);
+  if (lightboxPanel) {
+    lightboxPanel.classList.toggle("no-media", !hasMedia);
+    // Landscape posters need the full panel width to be readable, so stack.
+    lightboxPanel.classList.toggle("has-poster", hasPoster);
+  }
 
-  // A demo video takes the media slot over the still image.
-  lightboxImg.hidden = hasVideo;
+  if (lightboxPoster) {
+    lightboxPoster.hidden = !hasPoster;
+    if (hasPoster) {
+      lightboxPoster.href = project.poster.pdf || project.poster.image;
+      const posterImg = lightboxPoster.querySelector("img");
+      posterImg.src = project.poster.image;
+      posterImg.alt = `${project.title} — research poster`;
+    }
+  }
+
+  // A poster or demo video takes the media slot over the still image.
+  lightboxImg.hidden = hasVideo || hasPoster;
   if (lightboxVideo) {
     lightboxVideo.hidden = !hasVideo;
     lightboxVideo.innerHTML = "";
@@ -595,7 +630,7 @@ function openLightbox(project, trigger) {
       buildVideoFacade(project.video, project.title);
     }
   }
-  if (hasImage && !hasVideo) {
+  if (hasImage && !hasVideo && !hasPoster) {
     lightboxImg.src = project.image;
     lightboxImg.alt = project.title;
   }
@@ -674,6 +709,7 @@ document.querySelectorAll("#projects .card").forEach((card) => {
     video: details.video,
     stack: details.stack,
     highlights: details.highlights,
+    poster: details.poster,
     links: details.links || (githubEl ? [{ label: "View on GitHub", href: githubEl.href, icon: "github" }] : []),
   };
 
