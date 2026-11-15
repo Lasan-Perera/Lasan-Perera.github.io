@@ -366,6 +366,32 @@ let lightboxTrigger = null;
 // Builds the click-to-play cover for a video project. The iframe is only
 // created once someone presses play, so the panel opens instantly on the
 // thumbnail and YouTube is never contacted before that.
+// `video` is either a YouTube ID or a path to a video file in the repo.
+function isVideoFile(src) {
+  return /\.(mp4|webm|ogv)(?:[?#]|$)/i.test(src);
+}
+
+// Self-hosted demo: starts playing as soon as the lightbox opens. Muted so
+// browsers allow autoplay; controls let viewers pause, unmute or go fullscreen.
+// closeLightbox() removes the element, which stops playback.
+function buildLocalVideo(src, poster, title) {
+  const video = document.createElement("video");
+  video.src = src;
+  if (poster) video.poster = poster;
+  video.muted = true;
+  video.loop = true;
+  video.autoplay = true;
+  video.controls = true;
+  video.playsInline = true;
+  video.setAttribute("playsinline", "");
+  video.preload = "auto";
+  video.setAttribute("aria-label", title + " — demo video");
+  lightboxVideo.appendChild(video);
+  const playing = video.play();
+  // If autoplay is still blocked, the poster and controls are already showing.
+  if (playing && playing.catch) playing.catch(() => {});
+}
+
 function buildVideoFacade(videoId, title) {
   const poster = document.createElement("img");
   poster.className = "lightbox-video-poster";
@@ -443,6 +469,22 @@ const PROJECT_DETAILS = {
     links: [
       { label: "Research Poster (PDF)", href: "assets/project/robodog-poster.pdf", icon: "link" },
       { label: "View on GitHub", href: "https://github.com/Lasan-Perera", icon: "github" },
+    ],
+  },
+  "6-DOF Manipulator — Pick-and-Place Simulation": {
+    // A local .mp4 autoplays (muted, looping) when the card opens.
+    video: "assets/project/gp7-pick-place.mp4",
+    videoPoster: "assets/project/gp7-pick-place-poster.jpg",
+    stack: ["ROS 2", "Gazebo", "ros2_control", "Python / NumPy", "Robotiq 2F-85", "Moondream2"],
+    highlights: [
+      "Ported the Yaskawa Motoman GP7 from ROS 1 to ROS 2 with ros2_control and a Robotiq 2F-85 gripper. Per-link inertia comes from mesh volume, scaled to the real arm's 34 kg.",
+      "Forward kinematics from a hand-derived D-H table, verified against live Gazebo TF. That check caught three joint-convention mismatches, including a θ6 sign flip only visible in orientation.",
+      "Closed-form inverse kinematics by position/orientation decoupling, covering elbow, wrist-flip and shoulder branches, filtered by real joint limits and confirmed by FK round-trip and in Gazebo.",
+      "LSPB (trapezoidal-velocity) trajectories with all six joints paced to the slowest one, executed through the FollowJointTrajectory action so each move really finishes before the next starts.",
+      "Extensions: geometric Jacobian, singularity and manipulability analysis, a 20,000-sample workspace map, and a Moondream2 vision pipeline that picks boxes from plain-language descriptions.",
+    ],
+    links: [
+      { label: "GitHub Repo", href: "https://github.com/Lasan-Perera/6DoF-Robot-Manipulator-Simulation", icon: "github" },
     ],
   },
   "6-DOF Robotic Arm": {
@@ -627,7 +669,11 @@ function openLightbox(project, trigger) {
     lightboxVideo.innerHTML = "";
     lightboxVideo.classList.remove("is-playing");
     if (hasVideo) {
-      buildVideoFacade(project.video, project.title);
+      if (isVideoFile(project.video)) {
+        buildLocalVideo(project.video, project.videoPoster, project.title);
+      } else {
+        buildVideoFacade(project.video, project.title);
+      }
     }
   }
   if (hasImage && !hasVideo && !hasPoster) {
@@ -707,6 +753,7 @@ document.querySelectorAll("#projects .card").forEach((card) => {
     description: descEl ? descEl.textContent.trim() : "",
     badge: details.badge,
     video: details.video,
+    videoPoster: details.videoPoster,
     stack: details.stack,
     highlights: details.highlights,
     poster: details.poster,

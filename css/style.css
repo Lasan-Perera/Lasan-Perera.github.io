@@ -305,6 +305,15 @@ label:focus-visible {
   border: 0;
 }
 
+/* Self-hosted demo video (autoplays muted when the card opens) */
+.lightbox-video video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
+
 /* Click-to-play cover: the panel opens on the video's own thumbnail, so it
    is never a blank rectangle. The iframe only appears once play is pressed,
    and sits above the poster and spinner, covering them as soon as it paints. */
