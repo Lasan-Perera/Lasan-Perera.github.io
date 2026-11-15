@@ -1186,30 +1186,6 @@ button.nav-link {
   margin: 2.5rem 0 0;
 }
 
-/* GitHub activity widgets */
-.github-stats {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.github-stats img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 6px;
-}
-
-#githubContribGraph {
-  max-width: 480px;
-}
-
-#githubTopLangs {
-  max-width: 300px;
-}
-
 .project {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
